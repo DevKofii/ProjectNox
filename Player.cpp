@@ -8,7 +8,8 @@ void Player::initVariables()
 void Player::initShape()
 {
 	this->shape.setFillColor(sf::Color::White);
-	this->shape.setSize(sf::Vector2f(50.f, 50.f));
+	this->shape.setSize(sf::Vector2f(100.f, 100.f));
+	this->shape.setScale(sf::Vector2f(0.5f, 0.5f));
 }
 
 Player::Player(float x, float y)
@@ -23,7 +24,6 @@ Player::~Player()
 {
 	//Window Bounds Collision
 
-
 }
 
 bool Player::getcollisionState_L()
@@ -31,9 +31,71 @@ bool Player::getcollisionState_L()
 	return collidedLeft;
 }
 
+bool Player::getcollisionState_R()
+{
+	return collidedRight;
+}
+
+bool Player::getcollisionState_T()
+{
+	return collidedTop;
+}
+
+bool Player::getcollisionState_D()
+{
+	return collidedDown;
+}
+
 void Player::setcollisionState_L(bool collidedLeft)
 {
 	this->collidedLeft = collidedLeft;
+}
+
+void Player::setcollisionState_R(bool collidedRight)
+{
+	this->collidedRight = collidedRight;
+}
+
+void Player::setcollisionState_T(bool collidedTop)
+{
+	this->collidedTop = collidedTop;
+}
+
+void Player::setcollisionState_D(bool collidedDown)
+{
+	this->collidedDown = collidedDown;
+}
+
+void Player::teleport_left(bool collidedLeft)
+{
+	if (collidedLeft = true)
+	{
+		this->shape.setPosition(1280.f - this->shape.getGlobalBounds().width, this->shape.getPosition().y);
+	}
+}
+
+void Player::teleport_right(bool collidedRight)
+{
+	if (collidedRight = true)
+	{
+		this->shape.setPosition(0.f, this->shape.getPosition().y);
+	}
+}
+
+void Player::teleport_top(bool collidedTop)
+{
+	if (collidedTop = true)
+	{
+		this->shape.setPosition(this->shape.getPosition().x, 720.f - this->shape.getGlobalBounds().height);
+	}
+}
+
+void Player::teleport_down(bool collidedDown)
+{
+	if (collidedDown = true)
+	{
+		this->shape.setPosition(this->shape.getPosition().x, 0.f);
+	}
 }
 
 void Player::updateInput()
@@ -74,11 +136,13 @@ void Player::updateWindowBoundsCollision(const sf::RenderTarget* target)
 	if (this->shape.getGlobalBounds().left + this->shape.getGlobalBounds().width >= target->getSize().x)
 	{
 		this->shape.setPosition(target->getSize().x - this->shape.getGlobalBounds().width,this->shape.getGlobalBounds().top);
+		setcollisionState_R(true);
 	}
 
 	//Top
 	if (this->shape.getGlobalBounds().top <= 0.f)
 	{
+		setcollisionState_T(true);
 		this->shape.setPosition(this->shape.getGlobalBounds().left, 0.f);
 	}
 
@@ -86,6 +150,7 @@ void Player::updateWindowBoundsCollision(const sf::RenderTarget* target)
 	if (this->shape.getGlobalBounds().top + this->shape.getGlobalBounds().height >= target->getSize().y)
 	{
 		this->shape.setPosition(this->shape.getGlobalBounds().left, target->getSize().y - this->shape.getGlobalBounds().height);
+		setcollisionState_D(true);
 	}
 }
 

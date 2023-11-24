@@ -12,12 +12,22 @@ void Map::initShape()
 	this->shape.setSize(sf::Vector2f(1280.f, 720.f));
 }
 
-Map::Map(float x, float y)
+Map::Map()
 {
-	this->shape.setPosition(x, y);
+	this->shape.setPosition(0.f, 0.f);
 
 	this->initVariables();
 	this->initShape();
+	gridNum = 1;
+}
+
+Map::Map(int gridNum)
+{
+	this->shape.setPosition(0.f, 0.f);
+
+	this->initVariables();
+	this->initShape();
+	this->gridNum = gridNum;
 }
 
 Map::~Map()
@@ -33,13 +43,34 @@ void Map::setMapState(bool state) {
 	this->state = state;
 }
 
+int Map::getGridNum()
+{
+	return gridNum;
+}
+
+void Map::setGridNum(int gridNum)
+{
+	this->gridNum = gridNum;
+}
+
 
 //ITT FUCKIN WOIRKED
-void Map::updateMap(bool state)
+void Map::updateMap(int gridNum)
 {
-	if (state == true)
+	switch (gridNum)
 	{
-		this->shape.setFillColor(sf::Color::Red);
+	case 1:
+		this->shape.setFillColor(sf::Color::Black);
+		break;
+	case 2:
+		this->shape.setFillColor(sf::Color::Blue);
+		break;
+	case 3:
+		this->shape.setFillColor(sf::Color::Cyan);
+		break;
+	case 4:
+		this->shape.setFillColor(sf::Color::Green);
+		break;
 	}
 }
 

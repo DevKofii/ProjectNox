@@ -10,7 +10,7 @@ class Player
 private:
 	sf::RectangleShape shape;
 	float movementSpeed;
-	bool collidedLeft = false;
+	bool collidedLeft = false, collidedRight = false, collidedTop = false, collidedDown = false;
 
 	void initVariables();
 	void initShape();
@@ -20,7 +20,20 @@ public:
 	virtual ~Player();
 
 	bool getcollisionState_L();
+	bool getcollisionState_R();
+	bool getcollisionState_T();
+	bool getcollisionState_D();
+
 	void setcollisionState_L(bool collidedLeft);
+	void setcollisionState_R(bool collidedRight);
+	void setcollisionState_T(bool collidedTop);
+	void setcollisionState_D(bool collidedDown);
+
+	void teleport_left(bool collidedLeft);
+	void teleport_right(bool collidedRight);
+	void teleport_top(bool collidedTop);
+	void teleport_down(bool collidedDown);
+
 	void updateInput();
 	void updateWindowBoundsCollision(const sf::RenderTarget* target);
 	void update(const sf::RenderTarget* target);

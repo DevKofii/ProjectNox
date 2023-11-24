@@ -11,6 +11,7 @@
 
 #include "Player.h"
 #include "Map.h"
+#include "Point.h"
 
 using namespace std;
 
@@ -34,21 +35,19 @@ private:
 	sf::VideoMode videoMode;
 	sf::Event sfmlEvent;
 	bool endGame;
-	bool state = false;
-	int lb = 10, ub_x = 1270, ub_y = 710;
-	float randX = (rand() % (ub_x - lb + 1)) + lb;
 	sf::Vector2f num;
-	//sf::Vector2f randY = (rand() % (ub_y - lb + 1)) + lb;
 
 	//Game Objects
 	sf::RectangleShape enemy;
 	Map map;
 	Player player;
+	Point point;
 
 	//Private Functions
 	void initVars();
 	void initWindow();
 	void initEnemies();
+	void initPoint();
 
 public:
 	//Constructors
@@ -60,6 +59,7 @@ public:
 
 	//Functions
 	void pollEvents();
+	void collisionStates();
 	void update();
 	void render();
 };
