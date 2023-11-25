@@ -3,6 +3,7 @@
 void Player::initVariables()
 {
 	this->movementSpeed = 10.f;
+	this->updateNum = 1;
 }
 
 void Player::initShape()
@@ -46,6 +47,11 @@ bool Player::getcollisionState_D()
 	return collidedDown;
 }
 
+bool Player::getcollisionPoint()
+{
+	return collidePoint;
+}
+
 void Player::setcollisionState_L(bool collidedLeft)
 {
 	this->collidedLeft = collidedLeft;
@@ -64,6 +70,11 @@ void Player::setcollisionState_T(bool collidedTop)
 void Player::setcollisionState_D(bool collidedDown)
 {
 	this->collidedDown = collidedDown;
+}
+
+void Player::setcollisionPoint(bool collidePoint)
+{
+	this->collidePoint = collidePoint;
 }
 
 void Player::teleport_left(bool collidedLeft)
@@ -98,6 +109,27 @@ void Player::teleport_down(bool collidedDown)
 	}
 }
 
+sf::FloatRect Player::collisionTest()
+{
+	return this->shape.getGlobalBounds();
+}
+
+void Player::updatePlayer(int updateNum)
+{
+	switch (updateNum)
+	{
+	case 1:
+		this->shape.setFillColor(sf::Color::White);
+		break;
+	case 2:
+		this->shape.setFillColor(sf::Color::White);
+		break;
+	case 3:
+		this->shape.setFillColor(sf::Color::Black);
+	}
+}
+
+
 void Player::updateInput()
 {
 	//Keyboard Input
@@ -122,7 +154,7 @@ void Player::updateInput()
 void Player::updateWindowBoundsCollision(const sf::RenderTarget* target)
 {
 	//sf::Vector2f this->shape.getGlobalBounds() = this->shape.getPosition();
-	//Test
+
 	//Left
 	if (this->shape.getGlobalBounds().left <= 0.f)
 	{

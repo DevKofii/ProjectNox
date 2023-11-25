@@ -35,10 +35,11 @@ private:
 	sf::VideoMode videoMode;
 	sf::Event sfmlEvent;
 	bool endGame;
+	int gameRound = 1;
 	sf::Vector2f num;
 
 	//Game Objects
-	sf::RectangleShape enemy;
+	//sf::RectangleShape enemy;
 	Map map;
 	Player player;
 	Point point;
@@ -60,6 +61,12 @@ public:
 	//Functions
 	void pollEvents();
 	void collisionStates();
+	bool collisionPoint();
+
+	int getGameRound();
+	void setGameRound(int gameRound);
+
+
 	void update();
 	void render();
 };

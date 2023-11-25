@@ -63,13 +63,10 @@ void Map::updateMap(int gridNum)
 		this->shape.setFillColor(sf::Color::Black);
 		break;
 	case 2:
-		this->shape.setFillColor(sf::Color::Blue);
+		this->shape.setFillColor(sf::Color(79, 79, 79, 255));
 		break;
 	case 3:
-		this->shape.setFillColor(sf::Color::Cyan);
-		break;
-	case 4:
-		this->shape.setFillColor(sf::Color::Green);
+		this->shape.setFillColor(sf::Color::White);
 		break;
 	}
 }
