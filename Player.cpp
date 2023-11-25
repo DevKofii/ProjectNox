@@ -122,7 +122,7 @@ void Player::updateInput()
 void Player::updateWindowBoundsCollision(const sf::RenderTarget* target)
 {
 	//sf::Vector2f this->shape.getGlobalBounds() = this->shape.getPosition();
-
+	//Test
 	//Left
 	if (this->shape.getGlobalBounds().left <= 0.f)
 	{
