@@ -34,8 +34,10 @@ Point::~Point()
 void Point::randomSpawn()
 {
 	srand(time(NULL));
-	float x = rand() % 1080 + 200;
-	float y = rand() % 620 + 100;
+	float x = (rand() % (880 - 280 + 1)) + 280;
+	float y = (rand() % (520 - 120 + 1)) + 120;
+	//float x = rand() % 1080 + 100;
+	//float y = rand() % 720 + 50;
 	this->pointShape.setPosition(x, y);
 }
 

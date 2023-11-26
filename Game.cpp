@@ -303,6 +303,7 @@ bool Game::collisionPoint()
 		cout << "It collided.";
 		return true;
 	}
+	//return false;
 }
 
 int Game::getGameRound()
@@ -346,9 +347,18 @@ void Game::render()
 			this->setGameRound(2);
 			//Debug
 			cout << endl << "Point At: " << this->point.getGrid() << endl;
+			cout << endl << "Grid 1: " << this->point.getLockState(1) << endl;
+			cout << endl << "Grid 2: " << this->point.getLockState(2) << endl;
+			cout << endl << "Grid 3: " << this->point.getLockState(3) << endl;
+			cout << endl << "Grid 4: " << this->point.getLockState(4) << endl;
+			cout << endl << "Grid 5: " << this->point.getLockState(5) << endl;
+			cout << endl << "Grid 6: " << this->point.getLockState(6) << endl;
+			cout << endl << "Grid 7: " << this->point.getLockState(7) << endl;
+			cout << endl << "Grid 8: " << this->point.getLockState(8) << endl;
+			cout << endl << "Grid 9: " << this->point.getLockState(9) << endl;
 		}
 	}
-	else if (this->getGameRound() == 2)
+	if (this->getGameRound() == 2)
 	{
 		//set Vars for Round2
 		//Transfers Player to a different Round
@@ -366,16 +376,26 @@ void Game::render()
 			this->setGameRound(3);
 			//Debug
 			cout << endl << "Point At: " << this->point.getGrid() << endl;
+			cout << endl << "Grid 1: " << this->point.getLockState(1) << endl;
+			cout << endl << "Grid 2: " << this->point.getLockState(2) << endl;
+			cout << endl << "Grid 3: " << this->point.getLockState(3) << endl;
+			cout << endl << "Grid 4: " << this->point.getLockState(4) << endl;
+			cout << endl << "Grid 5: " << this->point.getLockState(5) << endl;
+			cout << endl << "Grid 6: " << this->point.getLockState(6) << endl;
+			cout << endl << "Grid 7: " << this->point.getLockState(7) << endl;
+			cout << endl << "Grid 8: " << this->point.getLockState(8) << endl;
+			cout << endl << "Grid 9: " << this->point.getLockState(9) << endl;
 		}
 	}
 
-	else if (this->getGameRound() == 3)
+	if (this->getGameRound() == 3)
 	{
 		this->map.updateMap(3);
 		this->player.updatePlayer(3);
 		if (this->collisionPoint() == true)
 		{
 			cout << endl << "Game Clear!" << endl;
+			this->window->close();
 		}
 	}
 
