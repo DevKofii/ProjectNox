@@ -1,18 +1,24 @@
 #pragma once
+#include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 
+using namespace std;
+
 class Player
 {
 private:
-	sf::RectangleShape shape;
+	sf::Texture tex1_R, tex2_R, tex3_R, tex1_L, tex2_L, tex3_L;
+	sf::Sprite sprite;
 	float movementSpeed;
 	bool collidedLeft = false, collidedRight = false, collidedTop = false, collidedDown = false, collidePoint = false;
 	int updateNum;
 
+	void initTex();
+	void initSprite();
 	void initVariables();
 	void initShape();
 
@@ -42,6 +48,7 @@ public:
 	sf::FloatRect collisionTest();
 
 	void updatePlayer(int updateNum);
+	int getUpdateNum();
 
 	void updateInput();
 	void updateWindowBoundsCollision(const sf::RenderTarget* target);

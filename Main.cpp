@@ -1,3 +1,4 @@
+#include "Menu.h"
 #include "Game.h"
 
 int main(int argc, char** argv)
@@ -10,17 +11,34 @@ int main(int argc, char** argv)
     signed int ss_y = dis_y / 2;
     //Random value
 
+    Menu menu;
     Game game;
     sf::Glyph;
 
     while (game.getWindowIsOpen())
-     {
+    {
         // Update
         game.update();
 
         // Render
         game.render();
     }
+    /*
+    while (menu.getWindowIsOpen())
+    {
+        menu.update();
+        menu.render();
+        /*
+        while (game.getWindowIsOpen())
+        {
+            // Update
+            game.update();
 
+            // Render
+            game.render();
+        }
+
+    }
+    */
     return 0;
 }

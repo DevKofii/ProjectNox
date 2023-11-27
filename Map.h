@@ -11,18 +11,18 @@
 class Map
 {
 private:
+	sf::Texture grid1, grid2, grid3, grid4, grid5, grid6, grid7, grid8, grid9;
+	sf::Sprite sprite;
 	sf::RectangleShape shape;
 	bool state;
 	int gridNum;
 
-	void initVariables();
+	void initTex();
+	void initSprite();
 	void initShape();
 	
 public:
 	Map();
-	Map(int gridNum);
-	//Map(float x = 0.f, float y = 0.f);
-	//Map(float x = 0.f, float y = 0.f, int gridNum = 1);
 	virtual ~Map();
 
 	bool getMapState();
@@ -30,6 +30,8 @@ public:
 
 	int getGridNum();
 	void setGridNum(int gridNum);
+
+	void setGridMap();
 
 	void updateMap(int gridNum); //updateMap states
 	void update(const sf::RenderTarget* target);

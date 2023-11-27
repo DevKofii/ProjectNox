@@ -34,7 +34,7 @@ private:
 	sf::RenderWindow* window;
 	sf::VideoMode videoMode;
 	sf::Event sfmlEvent;
-	bool endGame;
+	bool wait = false, endGame;
 	int gameRound = 1;
 	sf::Vector2f num;
 
@@ -42,12 +42,11 @@ private:
 	//sf::RectangleShape enemy;
 	Map map;
 	Player player;
-	Point point;
+	Point point1, point2, point3, point4;
 
 	//Private Functions
 	void initVars();
 	void initWindow();
-	void initEnemies();
 	void initPoint();
 
 public:

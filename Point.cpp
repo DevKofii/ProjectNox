@@ -2,9 +2,9 @@
 
 void Point::initShape()
 {
-	this->pointShape.setFillColor(sf::Color::White);
-	this->pointShape.setSize(sf::Vector2f(100.f, 100.f));
-	this->pointShape.setScale(sf::Vector2f(0.1f, 0.1f));
+	//this->pointShape.setFillColor(sf::Color::White);
+	//this->pointShape.setSize(sf::Vector2f(100.f, 100.f));
+	this->sprite.setScale(sf::Vector2f(0.7f, 0.7f));
 }
 
 void Point::initVariables()
@@ -21,10 +21,31 @@ void Point::initVariables()
 	this->lock9 = false;
 }
 
+void Point::initTex()
+{
+	if (!this->enemy.loadFromFile("images\\Enemy.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	if (!this->enemy_dead.loadFromFile("images\\Enemy_Dead.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	enemy.setSmooth(1);
+	enemy_dead.setSmooth(1);
+}
+
 Point::Point()
 {
-	this->pointShape.setPosition(-10, -10);
+	this->sprite.setPosition(-10, -10);
+
+	this->initTex();
+	this->initSprite();
 	this->initShape();
+}
+
+void Point::initSprite()
+{
 }
 
 Point::~Point()
@@ -34,11 +55,13 @@ Point::~Point()
 void Point::randomSpawn()
 {
 	srand(time(NULL));
-	float x = (rand() % (880 - 280 + 1)) + 280;
-	float y = (rand() % (520 - 120 + 1)) + 120;
+	this->setXCoord(this->x);
+	this->setYCoord(this->y);
+	//float x = (rand() % (880 - 280 + 1)) + 280;
+	//float y = (rand() % (520 - 120 + 1)) + 120;
 	//float x = rand() % 1080 + 100;
 	//float y = rand() % 720 + 50;
-	this->pointShape.setPosition(x, y);
+	this->sprite.setPosition(this->x, this->y);
 }
 
 void Point::randomGrid()
@@ -49,7 +72,7 @@ void Point::randomGrid()
 
 sf::FloatRect Point::collisionTest()
 {
-	return this->pointShape.getGlobalBounds();
+	return this->sprite.getGlobalBounds();
 }
 
 int Point::getGrid()
@@ -60,12 +83,12 @@ int Point::getGrid()
 void Point::deletePoint()
 {
 	//this->pointShape.setFillColor(sf::Color::Transparent);
-	this->pointShape.setPosition(-10, -10);
+	this->sprite.setPosition(-10, -10);
 }
 
 void Point::render(sf::RenderTarget* target)
 {
-	target->draw(this->pointShape);
+	target->draw(this->sprite);
 }
 
 void Point::updatePoint(int updatePoint)
@@ -74,13 +97,15 @@ void Point::updatePoint(int updatePoint)
 	switch (updatePoint)
 	{
 	case 1:
-		this->pointShape.setFillColor(sf::Color::White);
+		this->updateNum = 1;
+		this->sprite.setTexture(this->enemy);
+		//this->pointShape.setFillColor(sf::Color::White);
 		break;
 	case 2:
-		this->pointShape.setFillColor(sf::Color::Black);
-		break;
-	case 3:
-		this->pointShape.setFillColor(sf::Color::Black); //Color(R,G,B,Alpha);
+		this->updateNum = 2;
+		this->sprite.setTexture(this->enemy_dead);
+		this->sprite.setColor(sf::Color(255,255,255,0));
+		//this->pointShape.setFillColor(sf::Color::White);
 		break;
 	}
 }
@@ -119,6 +144,38 @@ bool Point::getLockState(int gridNum)
 	}
 }
 
+float Point::getXCoord()
+{
+	return x;
+}
+
+float Point::getYCoord()
+{
+	return y;
+}
+
+void Point::setXCoord(float temp)
+{
+	temp = (rand() % (880 - 280 + 1)) + 280;
+	this->x = temp;
+}
+
+void Point::setYCoord(float temp)
+{
+	temp = (rand() % (520 - 120 + 1)) + 120;
+	this->y = temp;
+}
+
+void Point::setAlpha(int x)
+{
+	this->sprite.setColor(sf::Color(255, 255, 255, x));
+}
+
+void Point::setGrid(int grid)
+{
+	this->randGridNum = grid;
+}
+
 void Point::setLockGridState(int gridNum)
 {
 	switch (gridNum)
@@ -151,4 +208,11 @@ void Point::setLockGridState(int gridNum)
 		this->lock9 = true;
 		break;
 	}
+}
+
+void Point::setSpawn(float tempX, float tempY)
+{
+	this->x = tempX;
+	this->y = tempY;
+	this->sprite.setPosition(tempX, tempY);
 }
