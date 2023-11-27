@@ -87,7 +87,6 @@ void Game::pollEvents()
 
 void Game::collisionStates()
 {
-
 	// Grid 1
 	if (player.getcollisionState_R() == true && map.getGridNum() == 1)
 	{

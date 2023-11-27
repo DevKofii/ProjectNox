@@ -9,6 +9,8 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 
+using namespace std;
+
 class Menu
 {
 private:
@@ -16,8 +18,16 @@ private:
 	sf::VideoMode videoMode;
 	sf::Event sfmlEvent;
 
+	sf::Texture title1, title2, main1, main2, main3;
+	sf::Sprite sprite;
+	
+	int state = 1;
+	bool wait = false;
+
 	void initVars();
 	void initWindow();
+	void initTex();
+	void initSprite();
 
 public:
 	Menu();
@@ -26,6 +36,8 @@ public:
 	const bool getWindowIsOpen() const;
 
 	void pollEvents();
+
+	int getState();
 
 	void update();
 	void render();

@@ -41,7 +41,6 @@ void Player::initSprite()
 
 void Player::initVariables()
 {
-
 	this->movementSpeed = 10.f;
 	this->updateNum = 1;
 }

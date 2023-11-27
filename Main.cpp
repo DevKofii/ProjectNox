@@ -12,9 +12,9 @@ int main(int argc, char** argv)
     //Random value
 
     Menu menu;
-    Game game;
     sf::Glyph;
 
+    /*
     while (game.getWindowIsOpen())
     {
         // Update
@@ -23,12 +23,16 @@ int main(int argc, char** argv)
         // Render
         game.render();
     }
-    /*
+    */
+   
     while (menu.getWindowIsOpen())
     {
         menu.update();
         menu.render();
-        /*
+    }
+    if (menu.getState() == 3)
+    {
+        Game game;
         while (game.getWindowIsOpen())
         {
             // Update
@@ -37,8 +41,6 @@ int main(int argc, char** argv)
             // Render
             game.render();
         }
-
     }
-    */
     return 0;
 }
