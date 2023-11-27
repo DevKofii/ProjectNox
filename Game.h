@@ -34,6 +34,10 @@ private:
 	sf::RenderWindow* window;
 	sf::VideoMode videoMode;
 	sf::Event sfmlEvent;
+	sf::SoundBuffer buffer;
+	sf::Sound stab;
+	sf::Music music;
+
 	bool wait = false, endGame;
 	int gameRound = 1;
 	sf::Vector2f num;
@@ -48,6 +52,8 @@ private:
 	void initVars();
 	void initWindow();
 	void initPoint();
+	void initSFX();
+	void initMusic();
 
 public:
 	//Constructors

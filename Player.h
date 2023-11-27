@@ -13,6 +13,7 @@ class Player
 private:
 	sf::Texture tex1_R, tex2_R, tex3_R, tex1_L, tex2_L, tex3_L;
 	sf::Sprite sprite;
+
 	float movementSpeed;
 	bool collidedLeft = false, collidedRight = false, collidedTop = false, collidedDown = false, collidePoint = false;
 	int updateNum;
@@ -21,6 +22,7 @@ private:
 	void initSprite();
 	void initVariables();
 	void initShape();
+	void initSFX();
 
 public:
 	Player(float x = 640.f, float y = 360.f);
@@ -49,6 +51,7 @@ public:
 
 	void updatePlayer(int updateNum);
 	int getUpdateNum();
+
 
 	void updateInput();
 	void updateWindowBoundsCollision(const sf::RenderTarget* target);

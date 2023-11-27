@@ -42,11 +42,32 @@ void Game::initPoint()
 	cout << endl << "Grid 9: " << this->point1.getLockState(9) << endl;
 }
 
+void Game::initSFX()
+{
+	buffer.loadFromFile("sfx\\stab.mp3");
+	stab.setBuffer(buffer);
+	stab.setLoop(0);
+	stab.setVolume(25.f);
+}
+
+void Game::initMusic()
+{
+	if (!music.openFromFile("music\\Undertale OST..._ - Gaster's Theme Extended.mp3"))
+	{
+		//error
+	}
+	music.setVolume(25.f);
+	music.setLoop(1);
+	music.play();
+}
+
 Game::Game()
 {
 	this->initVars();
 	this->initWindow();
 	this->initPoint();
+	this->initSFX();
+	this->initMusic();
 }
 
 Game::~Game()
@@ -343,6 +364,7 @@ void Game::render()
 		//set Vars for Round1
 		if (this->point1.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
 		{
+			this->stab.play();
 			this->point1.deletePoint();
 			this->point2.setAlpha(255);
 			this->point1.randomGrid();
@@ -376,6 +398,7 @@ void Game::render()
 
 		if (this->point1.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
 		{
+			this->stab.play();
 			this->point1.deletePoint();
 			this->point3.setAlpha(255);
 			this->point1.randomGrid();
@@ -405,6 +428,7 @@ void Game::render()
 		this->player.updatePlayer(3);
 		if (this->point1.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
 		{
+			this->stab.play();
 			this->point1.deletePoint();
 			this->point1.setAlpha(0);
 			this->point4.setAlpha(255);

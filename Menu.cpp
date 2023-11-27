@@ -48,6 +48,41 @@ void Menu::initSprite()
 	this->sprite.setTexture(this->title1);
 }
 
+void Menu::initSound()
+{
+	buffer1.loadFromFile("sfx\\open.wav");
+	buffer2.loadFromFile("sfx\\close.wav");
+	buffer3.loadFromFile("sfx\\hover.mp3");
+	buffer4.loadFromFile("sfx\\select.wav");
+
+	open.setBuffer(buffer1);
+	open.setLoop(0);
+	open.setVolume(25.f);
+	open.setPlayingOffset(sf::seconds(2.f));
+
+	close.setBuffer(buffer2);
+	close.setLoop(0);
+	close.setVolume(25.f);
+
+	hover.setBuffer(buffer3);
+	hover.setLoop(0);
+	hover.setVolume(25.f);
+
+	select.setBuffer(buffer4);
+	select.setLoop(0);
+	select.setVolume(25.f);
+}
+
+void Menu::initMusic()
+{
+	if (!music.openFromFile("music\\Undertale OST - So Cold Extended.mp3"))
+	{
+		//error
+	}
+	music.setVolume(25.f);
+	music.setLoop(1);
+}
+
 Menu::Menu()
 {
 	this->sprite.setPosition(0.f, 0.f);
@@ -56,6 +91,8 @@ Menu::Menu()
 	this->initWindow();
 	this->initTex();
 	this->initSprite();
+	this->initSound();
+	this->initMusic();
 }
 
 Menu::~Menu()
@@ -89,19 +126,30 @@ void Menu::pollEvents()
 			case 1:
 				if (this->sfmlEvent.mouseMove.x >= 587 && this->sfmlEvent.mouseMove.x <= 691 &&
 					this->sfmlEvent.mouseMove.y >= 285 && this->sfmlEvent.mouseMove.y <= 431)
+				{
+					open.play();
 					this->sprite.setTexture(this->title2);
+				}
 				else
+				{
 					this->sprite.setTexture(this->title1);
+				}
 				break;
 			case 2:
 				if (this->sfmlEvent.mouseMove.x >= 464 && this->sfmlEvent.mouseMove.x <= 815 &&
 					this->sfmlEvent.mouseMove.y >= 315 && this->sfmlEvent.mouseMove.y <= 410)
+				{
+					this->hover.play();
 					this->sprite.setTexture(this->main2);
-
+				}
+					
 				else if (this->sfmlEvent.mouseMove.x >= 464 && this->sfmlEvent.mouseMove.x <= 815 &&
 					this->sfmlEvent.mouseMove.y >= 468 && this->sfmlEvent.mouseMove.y <= 560)
+				{
+					this->hover.play();
 					this->sprite.setTexture(this->main3);
-
+				}
+					
 				else
 					this->sprite.setTexture(this->main1);
 
@@ -117,7 +165,9 @@ void Menu::pollEvents()
 				{
 					if (this->sfmlEvent.mouseButton.button == sf::Mouse::Left)
 					{
+						this->close.play();
 						//cout << endl << "Click!";
+						this->music.play();
 						this->sprite.setTexture(this->main1);
 						this->state = 2;
 					}
@@ -130,7 +180,9 @@ void Menu::pollEvents()
 					if (this->sfmlEvent.mouseButton.button == sf::Mouse::Left)
 					{
 						//cout << endl << "Click!";
+						this->select.play();
 						this->state = 3;
+						this->music.stop();
 						this->menuWindow->close();
 					}
 				}
@@ -140,7 +192,9 @@ void Menu::pollEvents()
 					if (this->sfmlEvent.mouseButton.button == sf::Mouse::Left)
 					{
 						//cout << endl << "Click!";
+						this->select.play();
 						this->state = 4;
+						this->music.stop();
 						this->menuWindow->close();
 					}
 				}
@@ -151,6 +205,7 @@ void Menu::pollEvents()
 
 	}
 }
+
 
 int Menu::getState()
 {

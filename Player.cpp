@@ -189,14 +189,14 @@ void Player::updateInput()
 		this->sprite.move(-this->movementSpeed, 0.f);
 		if (this->getUpdateNum() == 1) this->sprite.setTexture(this->tex1_L);
 		else if (this->getUpdateNum() == 2) this->sprite.setTexture(this->tex2_L);
-		else if (this->getUpdateNum() == 2) this->sprite.setTexture(this->tex3_L);
+		else if (this->getUpdateNum() == 3) this->sprite.setTexture(this->tex3_L);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) // Move Right | D
 	{
 		this->sprite.move(this->movementSpeed, 0.f);
 		if (this->getUpdateNum() == 1) this->sprite.setTexture(this->tex1_R);
 		else if (this->getUpdateNum() == 2) this->sprite.setTexture(this->tex2_R);
-		else if (this->getUpdateNum() == 2) this->sprite.setTexture(this->tex3_R);
+		else if (this->getUpdateNum() == 3) this->sprite.setTexture(this->tex3_R);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) // Move Up | W
 	{
