@@ -8,7 +8,6 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
 
 #include "Player.h"
 #include "Map.h"
@@ -22,14 +21,18 @@ private:
 	sf::RenderWindow* window;
 	sf::VideoMode videoMode; //videoMode : VideoMode
 	sf::Event sfmlEvent;
-	sf::Texture uno, dos, tres, findhim;
+	sf::Texture one, two, three, four, five, six, seven, eight, nine, findhim;
 	sf::Sprite sprite;
 
-	sf::SoundBuffer buffer;
-	sf::Sound stab;
+	sf::SoundBuffer buf1, buf2, buf3, buf4, buf5, buf6, buf7, buf8, buf9, buf10, buffer;
+	sf::Sound stab, sfx1, sfx2, sfx3, sfx4, sfx5, sfx6, sfx7, sfx8, sfx9, sfx10;
 	sf::Music music;
 
-	bool endGame, toggle1 = false, toggle2 = false, toggle3 = false, toggle4 = false; //toggle4 : bool = false
+	sf::Thread thread;
+
+	bool endGame, set1, set2, set3, set4, set5, set6, set7, set8, set9, set10,
+	lock1, lock2, lock3, lock4, lock5, lock6, lock7, lock8, lock9, lock10;
+
 	int gameRound = 1; //gameRound : int = 1
 	sf::Vector2f num;
 
@@ -37,7 +40,7 @@ private:
 	//sf::RectangleShape enemy;
 	Map map;
 	Player player;
-	Point point1, point2, point3, point4;
+	Point bot_main, bot1, bot2, bot3, bot4, bot5, bot6, bot7, bot8, bot9, bot10;
 
 	//Private Functions
 	void initVars();
@@ -63,7 +66,9 @@ public:
 
 	int getGameRound();
 	void setGameRound(int gameRound);
-	void input(int round);
+	void input(int gameRound);
+
+	void renderSet();
 
 	void update();
 	void render();

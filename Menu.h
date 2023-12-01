@@ -41,6 +41,7 @@ public:
 	const bool getWindowIsOpen() const;
 
 	void pollEvents();
+	sf::FloatRect collisionTest();
 
 	int getState();
 

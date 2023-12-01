@@ -5,9 +5,27 @@ void Game::initVars()
 	this->window = nullptr;
 	this->endGame = false;
 	this->gameRound = 1;
-	this->toggle1 = false;
-	this->toggle2 = false;
-	this->toggle3 = false;
+	this->set1 = false;
+	this->set2 = false;
+	this->set3 = false;
+	this->set4 = false;
+	this->set5 = false;
+	this->set6 = false;
+	this->set7 = false;
+	this->set8 = false;
+	this->set9 = false;
+	this->set10 = false;
+
+	this->lock1 = false;
+	this->lock2 = false;
+	this->lock3 = false;
+	this->lock4 = false;
+	this->lock5 = false;
+	this->lock6 = false;
+	this->lock7 = false;
+	this->lock8 = false;
+	this->lock9 = false;
+	this->lock10 = false;
 	//this->point.display(); Debug
 }
 
@@ -22,18 +40,26 @@ void Game::initWindow()
 
 void Game::initPoint()
 {
-	this->point1.updatePoint(1);
-	this->point2.updatePoint(2);
-	this->point3.updatePoint(2);
-	this->point4.updatePoint(2);
+	this->bot_main.updatePoint(1);
+	this->bot1.updatePoint(2);
+	this->bot2.updatePoint(2);
+	this->bot3.updatePoint(2);
+	this->bot4.updatePoint(2);
+	this->bot5.updatePoint(2);
+	this->bot6.updatePoint(2);
+	this->bot7.updatePoint(2);
+	this->bot8.updatePoint(2);
+	this->bot9.updatePoint(2);
+	this->bot10.updatePoint(2);
 
-	this->point1.randomGrid();
-	while (this->point1.getGrid() == 1) this->point1.randomGrid(); // In case point spawns on player spawn lol
-	this->point2.setGrid(this->point1.getGrid());
-	this->point1.setLockGridState(this->point1.getGrid());
-	this->point1.randomSpawn();
-	this->point2.setSpawn(this->point1.getXCoord(), this->point1.getYCoord());
+	this->bot_main.randomGrid();
+	while (this->bot_main.getGrid() == 1) this->bot_main.randomGrid(); // In case point spawns on player spawn lol
+	this->bot1.setGrid(this->bot_main.getGrid());
+	this->bot_main.setLockGridState(this->bot_main.getGrid());
+	this->bot_main.randomSpawn();
+	this->bot1.setSpawn(this->bot_main.getXCoord(), this->bot_main.getYCoord());
 	//cout << endl << "Point At: " << this->point.getGrid() << endl;
+	/*
 	cout << endl << "Grid 1: " << this->point1.getLockState(1) << endl;
 	cout << endl << "Grid 2: " << this->point1.getLockState(2) << endl;
 	cout << endl << "Grid 3: " << this->point1.getLockState(3) << endl;
@@ -43,35 +69,66 @@ void Game::initPoint()
 	cout << endl << "Grid 7: " << this->point1.getLockState(7) << endl;
 	cout << endl << "Grid 8: " << this->point1.getLockState(8) << endl;
 	cout << endl << "Grid 9: " << this->point1.getLockState(9) << endl;
+	*/
 }
 
 void Game::initTex()
 {
-	if (!this->uno.loadFromFile("images\\uno.png"))
+	if (!this->one.loadFromFile("images\\Intermission\\1.png"))
 	{
 		cout << endl << "Texture Not Found." << endl;
 	}
-	if (!this->dos.loadFromFile("images\\dos.png"))
+	if (!this->two.loadFromFile("images\\Intermission\\2.png"))
 	{
 		cout << endl << "Texture Not Found." << endl;
 	}
-	if (!this->tres.loadFromFile("images\\tres.png"))
+	if (!this->three.loadFromFile("images\\Intermission\\3.png"))
 	{
 		cout << endl << "Texture Not Found." << endl;
 	}
-	if (!this->findhim.loadFromFile("images\\findhim.png"))
+	if (!this->four.loadFromFile("images\\Intermission\\4.png"))
 	{
 		cout << endl << "Texture Not Found." << endl;
 	}
-	uno.setSmooth(1);
-	dos.setSmooth(1);
-	tres.setSmooth(1);
+	if (!this->five.loadFromFile("images\\Intermission\\5.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	if (!this->six.loadFromFile("images\\Intermission\\6.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	if (!this->seven.loadFromFile("images\\Intermission\\7.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	if (!this->eight.loadFromFile("images\\Intermission\\8.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	if (!this->nine.loadFromFile("images\\Intermission\\9.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	if (!this->findhim.loadFromFile("images\\Intermission\\Error.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	one.setSmooth(1);
+	two.setSmooth(1);
+	three.setSmooth(1);
+	four.setSmooth(1);
+	five.setSmooth(1);
+	six.setSmooth(1);
+	seven.setSmooth(1);
+	eight.setSmooth(1);
+	nine.setSmooth(1);
 	findhim.setSmooth(1);
 }
 
 void Game::initSprite()
 {
-	this->sprite.setTexture(this->uno);
+	this->sprite.setTexture(this->one);
 }
 
 void Game::initSFX()
@@ -80,6 +137,56 @@ void Game::initSFX()
 	stab.setBuffer(buffer);
 	stab.setLoop(0);
 	stab.setVolume(25.f);
+
+	buf1.loadFromFile("voice\\One.mp3");
+	sfx1.setBuffer(buf1);
+	sfx1.setLoop(0);
+	sfx1.setVolume(25.f);
+
+	buf2.loadFromFile("voice\\Two.mp3");
+	sfx2.setBuffer(buf2);
+	sfx2.setLoop(0);
+	sfx2.setVolume(25.f);
+
+	buf3.loadFromFile("voice\\Three.mp3");
+	sfx3.setBuffer(buf3);
+	sfx3.setLoop(0);
+	sfx3.setVolume(25.f);
+
+	buf4.loadFromFile("voice\\Four.mp3");
+	sfx4.setBuffer(buf4);
+	sfx4.setLoop(0);
+	sfx4.setVolume(25.f);
+
+	buf5.loadFromFile("voice\\Five.mp3");
+	sfx5.setBuffer(buf5);
+	sfx5.setLoop(0);
+	sfx5.setVolume(25.f);
+
+	buf6.loadFromFile("voice\\Six.mp3");
+	sfx6.setBuffer(buf6);
+	sfx6.setLoop(0);
+	sfx6.setVolume(25.f);
+
+	buf7.loadFromFile("voice\\Seven.mp3");
+	sfx7.setBuffer(buf7);
+	sfx7.setLoop(0);
+	sfx7.setVolume(25.f);
+
+	buf8.loadFromFile("voice\\Eight.mp3");
+	sfx8.setBuffer(buf8);
+	sfx8.setLoop(0);
+	sfx8.setVolume(25.f);
+
+	buf9.loadFromFile("voice\\Nine.mp3");
+	sfx9.setBuffer(buf9);
+	sfx9.setLoop(0);
+	sfx9.setVolume(25.f);
+
+	buf10.loadFromFile("voice\\Error.mp3");
+	sfx10.setBuffer(buf10);
+	sfx10.setLoop(0);
+	sfx10.setVolume(25.f);
 }
 
 void Game::initMusic()
@@ -93,10 +200,11 @@ void Game::initMusic()
 	music.play();
 }
 
-Game::Game()
+Game::Game() : thread(&Game::renderSet, this)
 {
 	this->sprite.setPosition(0.f, 0.f);
 
+	this->thread.launch();
 	this->initVars();
 	this->initWindow();
 	this->initPoint();
@@ -132,11 +240,6 @@ void Game::pollEvents()
 			if (this->sfmlEvent.key.code == sf::Keyboard::Escape)
 				this->window->close();
 			break;
-		case sf::Event::LostFocus:
-			this->wait = true;
-			break;
-		case sf::Event::GainedFocus:
-			this->wait = false;
 		}
 	}
 
@@ -353,7 +456,7 @@ void Game::collisionStates()
 
 bool Game::collisionPoint()
 {
-	if (player.collisionTest().intersects(point1.collisionTest()))
+	if (player.collisionTest().intersects(bot_main.collisionTest()))
 	{
 		//cout << "It collided.";
 		return true;
@@ -371,181 +474,363 @@ void Game::setGameRound(int gameRound)
 	this->gameRound = gameRound;
 }
 
-
-void Game::input(int round)
+void Game::input(int gameRound)
 {
-	switch (round)
+	switch (gameRound)
 	{
 	case 1:
+		while (this->lock1 == false)
+		{
+			this->sfx1.play();
+			this->lock1 = true;
+		}
 		this->sprite.setColor(sf::Color(255, 255, 255, 255));
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->toggle1 == false)
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->set1 == false)
 		{
 			//this->sprite.setColor(sf::Color(255, 255, 255,  0));
-			this->toggle1 = true;
+			this->set1 = true;
 		}
 		break;
 	case 2:
-		this->sprite.setTexture(dos);
-		this->sprite.setColor(sf::Color(255, 255, 255, 255));
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->toggle2 == false)
+		while (this->lock2 == false)
 		{
-			toggle2 = true;
+			this->sfx2.play();
+			this->lock2 = true;
+		}
+		this->sprite.setTexture(two);
+		this->sprite.setColor(sf::Color(255, 255, 255, 255));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->set2 == false)
+		{
+			set2 = true;
 		}
 		break;
 
 	case 3:
-		this->sprite.setTexture(tres);
-		this->sprite.setColor(sf::Color(255, 255, 255, 255));
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->toggle3 == false)
+		while (this->lock3 == false)
 		{
-			toggle3 = true;
+			this->sfx3.play();
+			this->lock3 = true;
+		}
+		this->sprite.setTexture(three);
+		this->sprite.setColor(sf::Color(255, 255, 255, 255));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->set3 == false)
+		{
+			set3 = true;
 		}
 		break;
 	case 4:
+		while (this->lock4 == false)
+		{
+			this->sfx4.play();
+			this->lock4 = true;
+		}
+		this->sprite.setTexture(four);
+		this->sprite.setColor(sf::Color(255, 255, 255, 255));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->set4 == false)
+		{
+			set4 = true;
+		}
+		break;
+	case 5:
+		while (this->lock5 == false)
+		{
+			this->sfx5.play();
+			this->lock5 = true;
+		}
+		this->sprite.setTexture(five);
+		this->sprite.setColor(sf::Color(255, 255, 255, 255));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->set5 == false)
+		{
+			set5 = true;
+		}
+		break;
+	case 6:
+		while (this->lock6 == false)
+		{
+			this->sfx6.play();
+			this->lock6 = true;
+		}
+		this->sprite.setTexture(six);
+		this->sprite.setColor(sf::Color(255, 255, 255, 255));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->set6 == false)
+		{
+			set6 = true;
+		}
+		break;
+	case 7:
+		while (this->lock7 == false)
+		{
+			this->sfx7.play();
+			this->lock7 = true;
+		}
+		this->sprite.setTexture(seven);
+		this->sprite.setColor(sf::Color(255, 255, 255, 255));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->set7 == false)
+		{
+			set7 = true;
+		}
+		break;
+	case 8:
+		while (this->lock8 == false)
+		{
+			this->sfx8.play();
+			this->lock8 = true;
+		}
+		this->sprite.setTexture(eight);
+		this->sprite.setColor(sf::Color(255, 255, 255, 255));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->set8 == false)
+		{
+			set8 = true;
+		}
+		break;
+	case 9:
+		while (this->lock9 == false)
+		{
+			this->sfx9.play();
+			this->lock9 = true;
+		}
+		this->sprite.setTexture(nine);
+		this->sprite.setColor(sf::Color(255, 255, 255, 255));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->set9 == false)
+		{
+			set9 = true;
+		}
+		break;
+	case 10:
+		while (this->lock10 == false)
+		{
+			this->sfx10.play();
+			this->lock10 = true;
+		}
 		this->sprite.setTexture(findhim);
 		this->sprite.setColor(sf::Color(255, 255, 255, 255));
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->toggle4 == false)
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->set10 == false)
 		{
-			toggle4 = true;
+			set10 = true;
 		}
+		break;
+	}
+}
+
+void Game::renderSet()
+{
+	switch (this->getGameRound())
+	{
+	case 1:
+		input(1);
+		if (this->set1 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
+		this->player.updatePlayer(1);
+		//set Vars for Round1
+		if (this->bot_main.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
+		{
+			this->stab.play();
+			this->bot_main.deletePoint();
+			this->bot1.setAlpha(255);
+			this->bot_main.randomGrid();
+			while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			this->bot2.setGrid(this->bot_main.getGrid());
+			this->bot_main.setLockGridState(this->bot_main.getGrid());
+			this->bot_main.randomSpawn();
+			this->bot2.setSpawn(this->bot_main.getXCoord(), this->bot_main.getYCoord());
+			this->setGameRound(2);
+		}
+		break;
+	case 2:
+		//set Vars for Round2
+		//Transfers Player to a different Round
+		//this->point2.setAlpha(0);
+		input(2);
+		if (this->set2 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
+		this->map.updateMap(2);
+		this->player.updatePlayer(2);
+
+		if (this->bot_main.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
+		{
+			this->stab.play();
+			this->bot_main.deletePoint();
+			this->bot2.setAlpha(255);
+			this->bot_main.randomGrid();
+			while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			this->bot3.setGrid(this->bot_main.getGrid());
+			this->bot_main.setLockGridState(this->bot_main.getGrid());
+			this->bot_main.randomSpawn();
+			this->bot3.setSpawn(this->bot_main.getXCoord(), this->bot_main.getYCoord());
+			this->setGameRound(3);
+		}
+		break;
+	case 3:
+		input(3);
+		if (this->set3 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
+		this->map.updateMap(3);
+		this->player.updatePlayer(3);
+		if (this->bot_main.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
+		{
+			this->stab.play();
+			this->bot_main.deletePoint();
+			this->bot3.setAlpha(255);
+			this->bot_main.randomGrid();
+			while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			this->bot4.setGrid(this->bot_main.getGrid()); //
+			this->bot_main.setLockGridState(this->bot_main.getGrid());
+			this->bot_main.randomSpawn();
+			this->bot4.setSpawn(this->bot_main.getXCoord(), this->bot_main.getYCoord()); //
+			this->setGameRound(4);
+		}
+		break;
+	case 4:
+		input(4);
+		if (this->set4 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
+		this->map.updateMap(4);
+		this->player.updatePlayer(4);
+		if (this->bot_main.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
+		{
+			this->stab.play();
+			this->bot_main.deletePoint();
+			this->bot4.setAlpha(255);
+			this->bot_main.randomGrid();
+			while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			this->bot5.setGrid(this->bot_main.getGrid()); //
+			this->bot_main.setLockGridState(this->bot_main.getGrid());
+			this->bot_main.randomSpawn();
+			this->bot5.setSpawn(this->bot_main.getXCoord(), this->bot_main.getYCoord()); //
+			this->setGameRound(5);
+		}
+		break;
+	case 5:
+		input(5);
+		if (this->set5 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
+		this->map.updateMap(5);
+		this->player.updatePlayer(5);
+		if (this->bot_main.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
+		{
+			this->stab.play();
+			this->bot_main.deletePoint();
+			this->bot5.setAlpha(255);
+			this->bot_main.randomGrid();
+			while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			this->bot6.setGrid(this->bot_main.getGrid()); //
+			this->bot_main.setLockGridState(this->bot_main.getGrid());
+			this->bot_main.randomSpawn();
+			this->bot6.setSpawn(this->bot_main.getXCoord(), this->bot_main.getYCoord()); //
+			this->setGameRound(6);
+		}
+		break;
+	case 6:
+		input(6);
+		if (this->set6 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
+		this->map.updateMap(6);
+		this->player.updatePlayer(6);
+		if (this->bot_main.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
+		{
+			this->stab.play();
+			this->bot_main.deletePoint();
+			this->bot6.setAlpha(255);
+			this->bot_main.randomGrid();
+			while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			this->bot7.setGrid(this->bot_main.getGrid()); //
+			this->bot_main.setLockGridState(this->bot_main.getGrid());
+			this->bot_main.randomSpawn();
+			this->bot7.setSpawn(this->bot_main.getXCoord(), this->bot_main.getYCoord()); //
+			this->setGameRound(7);
+		}
+		break;
+	case 7:
+		input(7);
+		if (this->set7 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
+		this->map.updateMap(7);
+		this->player.updatePlayer(7);
+		if (this->bot_main.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
+		{
+			this->stab.play();
+			this->bot_main.deletePoint();
+			this->bot7.setAlpha(255);
+			this->bot_main.randomGrid();
+			while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			this->bot8.setGrid(this->bot_main.getGrid()); //
+			this->bot_main.setLockGridState(this->bot_main.getGrid());
+			this->bot_main.randomSpawn();
+			this->bot8.setSpawn(this->bot_main.getXCoord(), this->bot_main.getYCoord()); //
+			this->setGameRound(8);
+		}
+		break;
+	case 8:
+		input(8);
+		if (this->set8 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
+		this->map.updateMap(8);
+		this->player.updatePlayer(8);
+		if (this->bot_main.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
+		{
+			this->stab.play();
+			this->bot_main.deletePoint();
+			this->bot8.setAlpha(255);
+			this->bot_main.randomGrid();
+			while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			this->bot8.setGrid(this->bot_main.getGrid()); //
+			this->bot_main.setLockGridState(this->bot_main.getGrid());
+			this->bot_main.randomSpawn();
+			this->bot8.setSpawn(this->bot_main.getXCoord(), this->bot_main.getYCoord()); //
+			this->setGameRound(9);
+		}
+		break;
+	case 9:
+		input(9);
+		if (this->set9 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
+		this->map.updateMap(9);
+		this->player.updatePlayer(9);
+		if (this->bot_main.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
+		{
+			this->stab.play();
+			this->bot_main.deletePoint();
+			this->bot9.setAlpha(255);
+			this->bot_main.randomGrid();
+			while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			this->bot10.setGrid(this->bot_main.getGrid()); //
+			this->bot_main.setLockGridState(this->bot_main.getGrid());
+			this->bot_main.randomSpawn();
+			this->bot10.setSpawn(this->bot_main.getXCoord(), this->bot_main.getYCoord()); //
+			this->setGameRound(10);
+		}
+		break;
+	case 10:
+		input(10);
+		if (this->set10 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
+		this->map.updateMap(10);
+		this->player.updatePlayer(10);
 		break;
 	}
 }
 
 void Game::update()
 {
-	switch (this->wait)
-	{
-	case true:
-		break;
-	case false:
-		this->pollEvents();
-		this->map.update(this->window);
-		this->player.update(this->window);
-		this->collisionStates();
-		this->collisionPoint();
-		break;
-	}
+	this->pollEvents();
+	this->map.update(this->window);
+	this->player.update(this->window);
+	this->collisionStates();
+	this->collisionPoint();
 }
 
 void Game::render()
 {
 	//Render Game Objects
 	this->window->clear();
-
-	//Round Works. Time To Polish This Shit
-	//Draw Game Objects
-	if (this->getGameRound() == 1)
-	{
-		input(1);
-		if(this->toggle1 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
-		this->player.updatePlayer(1);
-		//set Vars for Round1
-		if (this->point1.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
-		{
-			this->stab.play();
-			this->point1.deletePoint();
-			this->point2.setAlpha(255);
-			this->point1.randomGrid();
-			while (this->point1.getLockState(this->point1.getGrid()) == true) this->point1.randomGrid();
-			this->point3.setGrid(this->point1.getGrid());
-			this->point1.setLockGridState(this->point1.getGrid());
-			this->point1.randomSpawn();
-			this->point3.setSpawn(this->point1.getXCoord(), this->point1.getYCoord());
-			this->setGameRound(2);
-			//Debug
-			cout << endl << "Point At: " << this->point1.getGrid() << endl;
-			cout << endl << "Grid 1: " << this->point1.getLockState(1) << endl;
-			cout << endl << "Grid 2: " << this->point1.getLockState(2) << endl;
-			cout << endl << "Grid 3: " << this->point1.getLockState(3) << endl;
-			cout << endl << "Grid 4: " << this->point1.getLockState(4) << endl;
-			cout << endl << "Grid 5: " << this->point1.getLockState(5) << endl;
-			cout << endl << "Grid 6: " << this->point1.getLockState(6) << endl;
-			cout << endl << "Grid 7: " << this->point1.getLockState(7) << endl;
-			cout << endl << "Grid 8: " << this->point1.getLockState(8) << endl;
-			cout << endl << "Grid 9: " << this->point1.getLockState(9) << endl;
-
-		}
-	}
-
-	if (this->getGameRound() == 2)
-	{
-		//set Vars for Round2
-		//Transfers Player to a different Round
-		//this->point2.setAlpha(0);
-		input(2);
-		if (this->toggle2 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
-		this->map.updateMap(2);
-		this->player.updatePlayer(2);
-
-		if (this->point1.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
-		{
-			this->stab.play();
-			this->point1.deletePoint();
-			this->point3.setAlpha(255);
-			this->point1.randomGrid();
-			while (this->point1.getLockState(this->point1.getGrid()) == true) this->point1.randomGrid();
-			this->point4.setGrid(this->point1.getGrid());
-			this->point1.setLockGridState(this->point1.getGrid());
-			this->point1.randomSpawn();
-			this->point4.setSpawn(this->point1.getXCoord(), this->point1.getYCoord());
-			this->setGameRound(3);
-			//Debug
-			cout << endl << "Point At: " << this->point1.getGrid() << endl;
-			cout << endl << "Grid 1: " << this->point1.getLockState(1) << endl;
-			cout << endl << "Grid 2: " << this->point1.getLockState(2) << endl;
-			cout << endl << "Grid 3: " << this->point1.getLockState(3) << endl;
-			cout << endl << "Grid 4: " << this->point1.getLockState(4) << endl;
-			cout << endl << "Grid 5: " << this->point1.getLockState(5) << endl;
-			cout << endl << "Grid 6: " << this->point1.getLockState(6) << endl;
-			cout << endl << "Grid 7: " << this->point1.getLockState(7) << endl;
-			cout << endl << "Grid 8: " << this->point1.getLockState(8) << endl;
-			cout << endl << "Grid 9: " << this->point1.getLockState(9) << endl;
-		}
-	}
-
-	if (this->getGameRound() == 3)
-	{
-		input(3);
-		if (this->toggle3 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
-		this->map.updateMap(3);
-		this->player.updatePlayer(3);
-		if (this->point1.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
-		{
-			this->stab.play();
-			this->point1.deletePoint();
-			this->point1.setAlpha(0);
-			this->point4.setAlpha(255);
-			this->point1.randomGrid();
-			while (this->point1.getLockState(this->point1.getGrid()) == true) this->point1.randomGrid();
-			this->point1.setLockGridState(this->point1.getGrid());
-			this->point1.randomSpawn();
-			this->setGameRound(4);
-			//this->window->close();
-		}
-	}
-
-	if (this->getGameRound() == 4)
-	{
-		input(4);
-		if (this->toggle4 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
-		this->map.updateMap(4);
-		this->player.updatePlayer(4);
-		if (this->point1.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
-		{
-			this->stab.play();
-			//this->window->close();
-		}
-	}
 	
+	this->renderSet();
 
 	this->map.render(this->window);
 	this->player.render(this->window);
 	this->window->draw(this->sprite);
-	if (this->point1.getGrid() == this->map.getGridNum()) this->point1.render(this->window);
-	if (this->point2.getGrid() == this->map.getGridNum()) this->point2.render(this->window);
-	if (this->point3.getGrid() == this->map.getGridNum()) this->point3.render(this->window);
-	if (this->point4.getGrid() == this->map.getGridNum()) this->point4.render(this->window);
+	if (this->bot_main.getGrid() == this->map.getGridNum()) this->bot_main.render(this->window);
+	if (this->bot1.getGrid() == this->map.getGridNum()) this->bot1.render(this->window);
+	if (this->bot2.getGrid() == this->map.getGridNum()) this->bot2.render(this->window);
+	if (this->bot3.getGrid() == this->map.getGridNum()) this->bot3.render(this->window);
+	if (this->bot4.getGrid() == this->map.getGridNum()) this->bot4.render(this->window);
+	if (this->bot5.getGrid() == this->map.getGridNum()) this->bot5.render(this->window);
+	if (this->bot6.getGrid() == this->map.getGridNum()) this->bot6.render(this->window);
+	if (this->bot7.getGrid() == this->map.getGridNum()) this->bot7.render(this->window);
+	if (this->bot8.getGrid() == this->map.getGridNum()) this->bot8.render(this->window);
+	if (this->bot9.getGrid() == this->map.getGridNum()) this->bot9.render(this->window);
+	if (this->bot10.getGrid() == this->map.getGridNum()) this->bot10.render(this->window);
+
 	//Debugs
 	//cout << this->getGameRound();
 	//if (this->player.getcollisionState_D() == true) this->point.~Point();

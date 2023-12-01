@@ -9,21 +9,9 @@ int main(int argc, char** argv)
     //Center Point
     signed int ss_x = dis_x / 2;
     signed int ss_y = dis_y / 2;
-    //Random value
 
     Menu menu;
     sf::Glyph;
-
-    /*
-    while (game.getWindowIsOpen())
-    {
-        // Update
-        game.update();
-
-        // Render
-        game.render();
-    }
-    */
    
     while (menu.getWindowIsOpen())
     {

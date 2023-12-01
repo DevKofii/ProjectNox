@@ -156,13 +156,13 @@ float Point::getYCoord()
 
 void Point::setXCoord(float temp)
 {
-	temp = (rand() % (880 - 280 + 1)) + 280;
+	temp = (rand() % (800 - 280 + 1)) + 280;
 	this->x = temp;
 }
 
 void Point::setYCoord(float temp)
 {
-	temp = (rand() % (520 - 120 + 1)) + 120;
+	temp = (rand() % (500 - 120 + 1)) + 120;
 	this->y = temp;
 }
 

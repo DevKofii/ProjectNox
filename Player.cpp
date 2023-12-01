@@ -151,7 +151,7 @@ void Player::teleport_down(bool collidedDown)
 		this->sprite.setPosition(this->sprite.getPosition().x, 0.f);
 	}
 }
-/
+
 sf::FloatRect Player::collisionTest()
 {
 	return this->sprite.getGlobalBounds();
@@ -163,17 +163,33 @@ void Player::updatePlayer(int updateNum)
 	{
 	case 1:
 		this->updateNum = 1;
-		// this->sprite.setColor(sf::Color::White);
 		break;
 	case 2:
 		this->updateNum = 2;
-		//this->sprite.setColor(sf::Color::White);
 		break;
 	case 3:
 		this->updateNum = 3;
 		break;
 	case 4:
 		this->updateNum = 4;
+		break;
+	case 5:
+		this->updateNum = 5;
+		break;
+	case 6:
+		this->updateNum = 6;
+		break;
+	case 7:
+		this->updateNum = 7;
+		break;
+	case 8:
+		this->updateNum = 8;
+		break;
+	case 9:
+		this->updateNum = 9;
+		break;
+	case 10:
+		this->updateNum = 10;
 		break;
 	}
 }
