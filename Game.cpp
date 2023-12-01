@@ -5,6 +5,9 @@ void Game::initVars()
 	this->window = nullptr;
 	this->endGame = false;
 	this->gameRound = 1;
+	this->toggle1 = false;
+	this->toggle2 = false;
+	this->toggle3 = false;
 	//this->point.display(); Debug
 }
 
@@ -42,6 +45,35 @@ void Game::initPoint()
 	cout << endl << "Grid 9: " << this->point1.getLockState(9) << endl;
 }
 
+void Game::initTex()
+{
+	if (!this->uno.loadFromFile("images\\uno.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	if (!this->dos.loadFromFile("images\\dos.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	if (!this->tres.loadFromFile("images\\tres.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	if (!this->findhim.loadFromFile("images\\findhim.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	uno.setSmooth(1);
+	dos.setSmooth(1);
+	tres.setSmooth(1);
+	findhim.setSmooth(1);
+}
+
+void Game::initSprite()
+{
+	this->sprite.setTexture(this->uno);
+}
+
 void Game::initSFX()
 {
 	buffer.loadFromFile("sfx\\stab.mp3");
@@ -63,9 +95,13 @@ void Game::initMusic()
 
 Game::Game()
 {
+	this->sprite.setPosition(0.f, 0.f);
+
 	this->initVars();
 	this->initWindow();
 	this->initPoint();
+	this->initTex();
+	this->initSprite();
 	this->initSFX();
 	this->initMusic();
 }
@@ -335,6 +371,47 @@ void Game::setGameRound(int gameRound)
 	this->gameRound = gameRound;
 }
 
+
+void Game::input(int round)
+{
+	switch (round)
+	{
+	case 1:
+		this->sprite.setColor(sf::Color(255, 255, 255, 255));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->toggle1 == false)
+		{
+			//this->sprite.setColor(sf::Color(255, 255, 255,  0));
+			this->toggle1 = true;
+		}
+		break;
+	case 2:
+		this->sprite.setTexture(dos);
+		this->sprite.setColor(sf::Color(255, 255, 255, 255));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->toggle2 == false)
+		{
+			toggle2 = true;
+		}
+		break;
+
+	case 3:
+		this->sprite.setTexture(tres);
+		this->sprite.setColor(sf::Color(255, 255, 255, 255));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->toggle3 == false)
+		{
+			toggle3 = true;
+		}
+		break;
+	case 4:
+		this->sprite.setTexture(findhim);
+		this->sprite.setColor(sf::Color(255, 255, 255, 255));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->toggle4 == false)
+		{
+			toggle4 = true;
+		}
+		break;
+	}
+}
+
 void Game::update()
 {
 	switch (this->wait)
@@ -360,6 +437,8 @@ void Game::render()
 	//Draw Game Objects
 	if (this->getGameRound() == 1)
 	{
+		input(1);
+		if(this->toggle1 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
 		this->player.updatePlayer(1);
 		//set Vars for Round1
 		if (this->point1.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
@@ -393,6 +472,9 @@ void Game::render()
 	{
 		//set Vars for Round2
 		//Transfers Player to a different Round
+		//this->point2.setAlpha(0);
+		input(2);
+		if (this->toggle2 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
 		this->map.updateMap(2);
 		this->player.updatePlayer(2);
 
@@ -424,6 +506,8 @@ void Game::render()
 
 	if (this->getGameRound() == 3)
 	{
+		input(3);
+		if (this->toggle3 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
 		this->map.updateMap(3);
 		this->player.updatePlayer(3);
 		if (this->point1.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
@@ -432,7 +516,24 @@ void Game::render()
 			this->point1.deletePoint();
 			this->point1.setAlpha(0);
 			this->point4.setAlpha(255);
-			cout << endl << "Game Clear!" << endl;
+			this->point1.randomGrid();
+			while (this->point1.getLockState(this->point1.getGrid()) == true) this->point1.randomGrid();
+			this->point1.setLockGridState(this->point1.getGrid());
+			this->point1.randomSpawn();
+			this->setGameRound(4);
+			//this->window->close();
+		}
+	}
+
+	if (this->getGameRound() == 4)
+	{
+		input(4);
+		if (this->toggle4 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
+		this->map.updateMap(4);
+		this->player.updatePlayer(4);
+		if (this->point1.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
+		{
+			this->stab.play();
 			//this->window->close();
 		}
 	}
@@ -440,6 +541,7 @@ void Game::render()
 
 	this->map.render(this->window);
 	this->player.render(this->window);
+	this->window->draw(this->sprite);
 	if (this->point1.getGrid() == this->map.getGridNum()) this->point1.render(this->window);
 	if (this->point2.getGrid() == this->map.getGridNum()) this->point2.render(this->window);
 	if (this->point3.getGrid() == this->map.getGridNum()) this->point3.render(this->window);

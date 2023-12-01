@@ -3,6 +3,7 @@
 #include <string>
 #include <cstdlib>
 
+
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
@@ -15,31 +16,21 @@
 
 using namespace std;
 
-/*
-sf::Sprite sprite() {
-	sf::Texture texture;
-	if (!texture.loadFromFile("images\\shadow_L.png")) {
-		exit(1);
-	}
-	texture.setSmooth(true);
-	sf::Sprite Nox;
-	Nox.setTexture(texture);
-	return Nox;
-}
-*/
-
 class Game {
 private:
 	//Variables
 	sf::RenderWindow* window;
-	sf::VideoMode videoMode;
+	sf::VideoMode videoMode; //videoMode : VideoMode
 	sf::Event sfmlEvent;
+	sf::Texture uno, dos, tres, findhim;
+	sf::Sprite sprite;
+
 	sf::SoundBuffer buffer;
 	sf::Sound stab;
 	sf::Music music;
 
-	bool wait = false, endGame;
-	int gameRound = 1;
+	bool endGame, toggle1 = false, toggle2 = false, toggle3 = false, toggle4 = false; //toggle4 : bool = false
+	int gameRound = 1; //gameRound : int = 1
 	sf::Vector2f num;
 
 	//Game Objects
@@ -52,25 +43,27 @@ private:
 	void initVars();
 	void initWindow();
 	void initPoint();
+	void initTex();
+	void initSprite();
 	void initSFX();
 	void initMusic();
 
 public:
 	//Constructors
 	Game();
-	virtual ~Game();
+	virtual ~Game(); // ~Game() : virtual
 	 
 	//Accessors
 	const bool getWindowIsOpen() const;
 
 	//Functions
-	void pollEvents();
+	void pollEvents(); //pollEvents() : void
 	void collisionStates();
 	bool collisionPoint();
 
 	int getGameRound();
 	void setGameRound(int gameRound);
-
+	void input(int round);
 
 	void update();
 	void render();

@@ -128,7 +128,6 @@ void Map::setGridMap()
 	}
 }
 
-//ITT FUCKIN WOIRKED
 void Map::updateMap(int gridNum)
 {
 	switch (gridNum)
