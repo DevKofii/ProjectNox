@@ -133,7 +133,7 @@ void Menu::pollEvents()
 				else
 				{
 					this->sprite.setTexture(this->title1);
-				}
+				}	
 				break;
 			case 2:
 				if (this->sfmlEvent.mouseMove.x >= 464 && this->sfmlEvent.mouseMove.x <= 815 &&
@@ -205,6 +205,12 @@ void Menu::pollEvents()
 
 	}
 }
+
+sf::FloatRect Menu::collisionTest()
+{
+	return this->sprite.getGlobalBounds();
+}
+
 
 
 int Menu::getState()
