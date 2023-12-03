@@ -11,7 +11,7 @@ using namespace std;
 class Player
 {
 private:
-	sf::Texture tex1, tex2_R, tex3_R, tex4_R, tex5_R, fin_R, tex2_L, tex3_L, tex4_L, tex5_L, fin_L;
+	sf::Texture tex1, tex2_R, tex3_R, tex4_R, tex5_R, fin_R, tex2_L, tex3_L, tex4_L, tex5_L, fin_L, ded;
 	sf::Sprite sprite;
 
 	sf::SoundBuffer buffer;

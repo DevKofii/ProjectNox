@@ -46,6 +46,10 @@ void Player::initTex()
 	{
 		cout << endl << "Texture Not Found." << endl;
 	}
+	if (!this->ded.loadFromFile("images\\Player_Dead.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
 	tex1.setSmooth(1);
 	tex2_R.setSmooth(1);
 	tex3_R.setSmooth(1);
@@ -58,6 +62,8 @@ void Player::initTex()
 	tex4_L.setSmooth(1);
 	tex5_L.setSmooth(1);
 	fin_L.setSmooth(1);
+
+	ded.setSmooth(1);
 }
 
 void Player::initSprite()
@@ -228,6 +234,11 @@ void Player::updatePlayer(int updateNum)
 		this->sprite.setTextureRect(sf::IntRect(0, 0, 82, 143));
 		this->updateNum = 10;
 		break;
+	case -1:
+		this->sprite.setTexture(this->ded);
+		this->sprite.setTextureRect(sf::IntRect(0, 0, 156, 75));
+		this->updateNum = -1;
+		break;
 	}
 }
 
@@ -248,6 +259,7 @@ void Player::updateInput()
 		if (this->getUpdateNum() == 6 || this->getUpdateNum() == 7) this->sprite.setTexture(this->tex4_L);
 		if (this->getUpdateNum() == 8 || this->getUpdateNum() == 9) this->sprite.setTexture(this->tex5_L);
 		if (this->getUpdateNum() == 10) this->sprite.setTexture(this->fin_L);
+		if (this->getUpdateNum() == -1) this->sprite.setTexture(this->ded);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) // Move Right | D
 	{
@@ -258,14 +270,17 @@ void Player::updateInput()
 		if (this->getUpdateNum() == 6 || this->getUpdateNum() == 7) this->sprite.setTexture(this->tex4_R);
 		if (this->getUpdateNum() == 8 || this->getUpdateNum() == 9) this->sprite.setTexture(this->tex5_R);
 		if (this->getUpdateNum() == 10) this->sprite.setTexture(this->fin_R);
+		if (this->getUpdateNum() == -1) this->sprite.setTexture(this->ded);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) // Move Up | W
 	{
 		this->sprite.move(0.f, -this->movementSpeed);
+		if (this->getUpdateNum() == -1) this->sprite.setTexture(this->ded);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) // Move Down | S
 	{
 		this->sprite.move(0.f, this->movementSpeed);
+		if (this->getUpdateNum() == -1) this->sprite.setTexture(this->ded);
 	}
 }
 

@@ -54,6 +54,8 @@ void Game::initPoint()
 	this->bot9.updatePoint(2);
 	this->bot10.updatePoint(1);
 
+	this->bot_hitbox.updatePoint(2);
+
 	//this->bot_main.randomGrid();
 	//while (this->bot_main.getGrid() == 1) this->bot_main.randomGrid(); // In case point spawns on player spawn lol
 	this->bot_main.setGrid(9);
@@ -189,17 +191,17 @@ void Game::initSFX()
 	buf10.loadFromFile("voice\\Error.mp3");
 	sfx10.setBuffer(buf10);
 	sfx10.setLoop(1);
-	sfx10.setVolume(15.f);
+	sfx10.setVolume(10.f);
 
-	whisp.loadFromFile("music\\Four Voices Whispering - Horror Film Sound Effects.mp3");
-	whis.setBuffer(whisp);
-	whis.setLoop(1);
-	whis.setVolume(15.f);
+	bufFinal.loadFromFile("voice\\whispers.mp3");
+	sfxFinal.setBuffer(bufFinal);
+	sfxFinal.setLoop(1);
+	sfxFinal.setVolume(5.f);
 }
 
 void Game::initMusic()
 {
-	if (!music.openFromFile("music\\Undertale OST..._ - Gaster's Theme Extended.mp3"))
+	if (!music.openFromFile("music\\Spooky.mp3"))
 	{
 		//error
 	}
@@ -463,12 +465,12 @@ void Game::collisionStates()
 
 bool Game::collisionPoint()
 {
-	if (player.collisionTest().intersects(bot_main.collisionTest()))
+	if (player.collisionTest().intersects(this->bot_main.collisionTest()))
 	{
 		//cout << "It collided.";
 		return true;
 	}
-	if (player.collisionTest().intersects(bot10.collisionTest()))
+	if (player.collisionTest().intersects(this->bot_hitbox.collisionTest()))
 	{
 		//cout << "It collided.";
 		return true;
@@ -628,7 +630,7 @@ void Game::input(int gameRound)
 		}
 		break;
 	case 10:
-		this->music.stop();
+		this->music.setVolume(0.f);
 		while (this->lock10 == false)
 		{
 			this->sfx10.play();
@@ -639,9 +641,10 @@ void Game::input(int gameRound)
 		this->sprite.setColor(sf::Color(255, 255, 255, 255));
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->set10 == false)
 		{
-			this->sfx10.stop();
+			this->sfx10.pause();
 			set10 = true;
 			this->move = true;
+			this->sfxFinal.play();
 		}
 		break;
 	}
@@ -834,13 +837,16 @@ void Game::renderSet()
 	case 10:
 		input(10);
 		if (this->set10 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
-		this->whis.play();
+		//this->whis.play();
 		this->map.updateMap(10);
 		this->player.updatePlayer(10);
 
+
 		if (this->map.getGridNum() == 5)
 		{
-			this->whis.setVolume(35.f);
+			this->bot_hitbox.setAlpha(0);
+			this->bot_hitbox.setGrid(5);
+			this->bot_hitbox.setSpawn(640, 360);
 
 			this->bot1.setGrid(5);
 			this->bot2.setGrid(5);
@@ -864,6 +870,8 @@ void Game::renderSet()
 			this->bot9.setSpawn(770, 500);
 			if (this->collisionPoint() == true)
 			{
+				this->player.updatePlayer(-1);
+				this->move = false;
 				cout << "BOO!";
 			}
 		}
