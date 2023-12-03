@@ -11,7 +11,8 @@
 class Map
 {
 private:
-	sf::Texture grid1, grid2, grid3, grid4, grid5, grid6, grid7, grid8, grid9;
+	sf::Texture grid1, grid2, grid3, grid4, grid5, grid6, grid7, grid8, grid9,
+		fin1, fin2, fin3, fin4, fin6, fin7, fin8, fin9;
 	sf::Sprite sprite;
 	sf::RectangleShape shape;
 	bool state;

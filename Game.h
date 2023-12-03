@@ -21,15 +21,19 @@ private:
 	sf::RenderWindow* window;
 	sf::VideoMode videoMode; //videoMode : VideoMode
 	sf::Event sfmlEvent;
-	sf::Texture one, two, three, four, five, six, seven, eight, nine, findhim;
+	sf::Texture one, two, three, four, five, six, seven, eight, nine, findhim, spook;
 	sf::Sprite sprite;
 
-	sf::SoundBuffer buf1, buf2, buf3, buf4, buf5, buf6, buf7, buf8, buf9, buf10, buffer, bufFinal;
-	sf::Sound stab, sfx1, sfx2, sfx3, sfx4, sfx5, sfx6, sfx7, sfx8, sfx9, sfx10, sfxFinal;
+	sf::SoundBuffer buf1, buf2, buf3, buf4, buf5, buf6, buf7, buf8, buf9, buf10, buffer, bufFinal, bufNox, bufSpook, bufAAA;
+	sf::Sound stab, sfx1, sfx2, sfx3, sfx4, sfx5, sfx6, sfx7, sfx8, sfx9, sfx10, sfxFinal, sfxNox, sfxSpook, sfxAAA;
 	sf::Music music;
+	sf::Clock m_clock;
+	sf::Time elapsedTime;
+	
+	float TimerCount;
 
-	bool endGame, set1, set2, set3, set4, set5, set6, set7, set8, set9, set10,
-	lock1, lock2, lock3, lock4, lock5, lock6, lock7, lock8, lock9, lock10, move;
+	bool endGame, set1, set2, set3, set4, set5, set6, set7, set8, set9, set10, set11,
+	lock1, lock2, lock3, lock4, lock5, lock6, lock7, lock8, lock9, lock10, lock11, move;
 
 	int gameRound = 1; //gameRound : int = 1
 	sf::Vector2f num;

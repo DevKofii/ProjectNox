@@ -247,6 +247,11 @@ int Player::getUpdateNum()
 	return updateNum;
 }
 
+void Player::setAlpha(int num)
+{
+	this->sprite.setColor(sf::Color(255, 255, 255, num));
+}
+
 void Player::updateInput()
 {
 	//Keyboard Input

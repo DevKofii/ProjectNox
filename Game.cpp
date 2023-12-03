@@ -17,6 +17,7 @@ void Game::initVars()
 	this->set8 = false;
 	this->set9 = false;
 	this->set10 = false;
+	this->set11 = false;
 
 	this->lock1 = false;
 	this->lock2 = false;
@@ -28,6 +29,9 @@ void Game::initVars()
 	this->lock8 = false;
 	this->lock9 = false;
 	this->lock10 = false;
+	this->lock11 = false;
+
+	this->elapsedTime = this->m_clock.restart();
 	//this->point.display(); Debug
 }
 
@@ -49,7 +53,7 @@ void Game::initPoint()
 	this->bot4.updatePoint(2);
 	this->bot5.updatePoint(2);
 	this->bot6.updatePoint(2);
-	this->bot7.updatePoint(2);
+	this->bot7.updatePoint(2); 
 	this->bot8.updatePoint(2);
 	this->bot9.updatePoint(2);
 	this->bot10.updatePoint(1);
@@ -119,6 +123,10 @@ void Game::initTex()
 	{
 		cout << endl << "Texture Not Found." << endl;
 	}
+	if (!this->spook.loadFromFile("images\\SpookyScare.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
 	one.setSmooth(1);
 	two.setSmooth(1);
 	three.setSmooth(1);
@@ -129,6 +137,7 @@ void Game::initTex()
 	eight.setSmooth(1);
 	nine.setSmooth(1);
 	findhim.setSmooth(1);
+	spook.setSmooth(1);
 }
 
 void Game::initSprite()
@@ -197,6 +206,21 @@ void Game::initSFX()
 	sfxFinal.setBuffer(bufFinal);
 	sfxFinal.setLoop(1);
 	sfxFinal.setVolume(5.f);
+
+	bufNox.loadFromFile("voice\\Nox.mp3");
+	sfxNox.setBuffer(bufNox);
+	sfxNox.setLoop(0);
+	sfxNox.setVolume(25.f);
+
+	bufSpook.loadFromFile("voice\\spookysound.mp3");
+	sfxSpook.setBuffer(bufSpook);
+	sfxSpook.setLoop(1);
+	sfxSpook.setVolume(25.f);
+
+	bufAAA.loadFromFile("voice\\AAA.mp3");
+	sfxAAA.setBuffer(bufAAA);
+	sfxAAA.setLoop(1);
+	sfxAAA.setVolume(10.f);
 }
 
 void Game::initMusic()
@@ -256,211 +280,421 @@ void Game::pollEvents()
 
 void Game::collisionStates()
 {
-	// Grid 1
-	if (player.getcollisionState_R() == true && map.getGridNum() == 1)
+	if (this->getGameRound() != 10)
 	{
-		map.setGridNum(2);
-		//map.updateMap(2);
-		player.teleport_right(true);
-		player.setcollisionState_R(false);
-	}
+		// Grid 1
+		if (player.getcollisionState_R() == true && map.getGridNum() == 1)
+		{
+			map.setGridNum(2);
+			//map.updateMap(2);
+			player.teleport_right(true);
+			player.setcollisionState_R(false);
+		}
 
-	if (player.getcollisionState_D() == true && map.getGridNum() == 1)
-	{
-		map.setGridNum(4);
-		//map.updateMap(4);
-		player.teleport_down(true);
-		player.setcollisionState_D(false);
-	}
+		if (player.getcollisionState_D() == true && map.getGridNum() == 1)
+		{
+			map.setGridNum(4);
+			//map.updateMap(4);
+			player.teleport_down(true);
+			player.setcollisionState_D(false);
+		}
 
-	// Grid 2
-	if (player.getcollisionState_L() == true && map.getGridNum() == 2)
-	{
-		map.setGridNum(1);
-		//map.updateMap(1);
-		player.teleport_left(true);
+		// Grid 2
+		if (player.getcollisionState_L() == true && map.getGridNum() == 2)
+		{
+			map.setGridNum(1);
+			//map.updateMap(1);
+			player.teleport_left(true);
+			player.setcollisionState_L(false);
+		}
+
+		if (player.getcollisionState_R() == true && map.getGridNum() == 2)
+		{
+			map.setGridNum(3);
+			//map.updateMap(3);
+			player.teleport_right(true);
+			player.setcollisionState_R(false);
+		}
+
+		if (player.getcollisionState_D() == true && map.getGridNum() == 2)
+		{
+			map.setGridNum(5);
+			//map.updateMap(5);
+			player.teleport_down(true);
+			player.setcollisionState_D(false);
+		}
+
+		// Grid 3
+		if (player.getcollisionState_L() == true && map.getGridNum() == 3)
+		{
+			map.setGridNum(2);
+			//map.updateMap(2);
+			player.teleport_left(true);
+		}
+
+		if (player.getcollisionState_D() == true && map.getGridNum() == 3)
+		{
+			map.setGridNum(6);
+			//map.updateMap(6);
+			player.teleport_down(true);
+			player.setcollisionState_D(false);
+		}
+
+		// Grid 4
+		if (player.getcollisionState_T() == true && map.getGridNum() == 4)
+		{
+			map.setGridNum(1);
+			//map.updateMap(1);
+			player.teleport_top(true);
+			player.setcollisionState_T(false);
+		}
+
+		if (player.getcollisionState_R() == true && map.getGridNum() == 4)
+		{
+			map.setGridNum(5);
+			//map.updateMap(5);
+			player.teleport_right(true);
+			player.setcollisionState_R(false);
+		}
+
+		if (player.getcollisionState_D() == true && map.getGridNum() == 4)
+		{
+			map.setGridNum(7);
+			//map.updateMap(7);
+			player.teleport_down(true);
+			player.setcollisionState_D(false);
+		}
+
+		// Grid 5
+		if (player.getcollisionState_L() == true && map.getGridNum() == 5)
+		{
+			map.setGridNum(4);
+			//map.updateMap(4);
+			player.teleport_left(true);
+			player.setcollisionState_L(false);
+		}
+
+		if (player.getcollisionState_R() == true && map.getGridNum() == 5)
+		{
+			map.setGridNum(6);
+			//map.updateMap(6);
+			player.teleport_right(true);
+			player.setcollisionState_R(false);
+		}
+
+		if (player.getcollisionState_T() == true && map.getGridNum() == 5)
+		{
+			map.setGridNum(2);
+			//map.updateMap(2);
+			player.teleport_top(true);
+			player.setcollisionState_T(false);
+		}
+
+		if (player.getcollisionState_D() == true && map.getGridNum() == 5)
+		{
+			map.setGridNum(8);
+			//map.updateMap(8);
+			player.teleport_down(true);
+			player.setcollisionState_D(false);
+		}
+
+		// Grid 6
+		if (player.getcollisionState_L() == true && map.getGridNum() == 6)
+		{
+			map.setGridNum(5);
+			//map.updateMap(5);
+			player.teleport_left(true);
+			player.setcollisionState_L(false);
+		}
+
+		if (player.getcollisionState_T() == true && map.getGridNum() == 6)
+		{
+			map.setGridNum(3);
+			//map.updateMap(3);
+			player.teleport_top(true);
+			player.setcollisionState_T(false);
+		}
+
+		if (player.getcollisionState_D() == true && map.getGridNum() == 6)
+		{
+			map.setGridNum(9);
+			//map.updateMap(9);
+			player.teleport_down(true);
+			player.setcollisionState_D(false);
+		}
+
+		// Grid 7
+		if (player.getcollisionState_R() == true && map.getGridNum() == 7)
+		{
+			map.setGridNum(8);
+			//map.updateMap(8);
+			player.teleport_right(true);
+			player.setcollisionState_R(false);
+		}
+
+		if (player.getcollisionState_T() == true && map.getGridNum() == 7)
+		{
+			map.setGridNum(4);
+			//map.updateMap(4);
+			player.teleport_top(true);
+			player.setcollisionState_T(false);
+		}
+
+		// Grid 8
+		if (player.getcollisionState_L() == true && map.getGridNum() == 8)
+		{
+			map.setGridNum(7);
+			//map.updateMap(7);
+			player.teleport_left(true);
+			player.setcollisionState_L(false);
+		}
+
+		if (player.getcollisionState_R() == true && map.getGridNum() == 8)
+		{
+			map.setGridNum(9);
+			//map.updateMap(9);
+			player.teleport_right(true);
+			player.setcollisionState_R(false);
+		}
+
+		if (player.getcollisionState_T() == true && map.getGridNum() == 8)
+		{
+			map.setGridNum(5);
+			//map.updateMap(5);
+			player.teleport_top(true);
+			player.setcollisionState_T(false);
+		}
+
+		// Grid 9
+		if (player.getcollisionState_L() == true && map.getGridNum() == 9)
+		{
+			map.setGridNum(8);
+			//map.updateMap(8);
+			player.teleport_left(true);
+			player.setcollisionState_L(false);
+		}
+
+		if (player.getcollisionState_T() == true && map.getGridNum() == 9)
+		{
+			map.setGridNum(6);
+			//map.updateMap(6);
+			player.teleport_top(true);
+			player.setcollisionState_T(false);
+		}
 		player.setcollisionState_L(false);
-	}
-
-	if (player.getcollisionState_R() == true && map.getGridNum() == 2)
-	{
-		map.setGridNum(3);
-		//map.updateMap(3);
-		player.teleport_right(true);
 		player.setcollisionState_R(false);
-	}
-
-	if (player.getcollisionState_D() == true && map.getGridNum() == 2)
-	{
-		map.setGridNum(5);
-		//map.updateMap(5);
-		player.teleport_down(true);
-		player.setcollisionState_D(false);
-	}
-	
-	// Grid 3
-	if (player.getcollisionState_L() == true && map.getGridNum() == 3)
-	{
-		map.setGridNum(2);
-		//map.updateMap(2);
-		player.teleport_left(true);
-	}
-
-	if (player.getcollisionState_D() == true && map.getGridNum() == 3)
-	{
-		map.setGridNum(6);
-		//map.updateMap(6);
-		player.teleport_down(true);
-		player.setcollisionState_D(false);
-	}
-
-	// Grid 4
-	if (player.getcollisionState_T() == true && map.getGridNum() == 4)
-	{
-		map.setGridNum(1);
-		//map.updateMap(1);
-		player.teleport_top(true);
 		player.setcollisionState_T(false);
-	}
-
-	if (player.getcollisionState_R() == true && map.getGridNum() == 4)
-	{
-		map.setGridNum(5);
-		//map.updateMap(5);
-		player.teleport_right(true);
-		player.setcollisionState_R(false);
-	}
-
-	if (player.getcollisionState_D() == true && map.getGridNum() == 4)
-	{
-		map.setGridNum(7);
-		//map.updateMap(7);
-		player.teleport_down(true);
 		player.setcollisionState_D(false);
 	}
-
-	// Grid 5
-	if (player.getcollisionState_L() == true && map.getGridNum() == 5)
+	else
 	{
-		map.setGridNum(4);
-		//map.updateMap(4);
-		player.teleport_left(true);
+		// Grid 1
+		if (player.getcollisionState_R() == true && map.getGridNum() == 11)
+		{
+			this->map.setGridNum(12);
+			//map.updateMap(2);
+			player.teleport_right(true);
+			player.setcollisionState_R(false);
+		}
+
+		if (player.getcollisionState_D() == true && map.getGridNum() == 11)
+		{
+			this->map.setGridNum(14);
+			//map.updateMap(4);
+			player.teleport_down(true);
+			player.setcollisionState_D(false);
+		}
+
+		// Grid 2
+		if (player.getcollisionState_L() == true && map.getGridNum() == 12)
+		{
+			this->map.setGridNum(11);
+			//map.updateMap(1);
+			player.teleport_left(true);
+			player.setcollisionState_L(false);
+		}
+
+		if (player.getcollisionState_R() == true && map.getGridNum() == 12)
+		{
+			this->map.setGridNum(13);
+			//map.updateMap(3);
+			player.teleport_right(true);
+			player.setcollisionState_R(false);
+		}
+
+		if (player.getcollisionState_D() == true && map.getGridNum() == 12)
+		{
+			map.setGridNum(5);
+			//map.updateMap(5);
+			player.teleport_down(true);
+			player.setcollisionState_D(false);
+		}
+
+		// Grid 3
+		if (player.getcollisionState_L() == true && map.getGridNum() == 13)
+		{
+			this->map.setGridNum(12);
+			//map.updateMap(2);
+			player.teleport_left(true);
+		}
+
+		if (player.getcollisionState_D() == true && map.getGridNum() == 13)
+		{
+			this->map.setGridNum(16);
+			//map.updateMap(6);
+			player.teleport_down(true);
+			player.setcollisionState_D(false);
+		}
+
+		// Grid 4
+		if (player.getcollisionState_T() == true && map.getGridNum() == 14)
+		{
+			this->map.setGridNum(11);
+			//map.updateMap(1);
+			player.teleport_top(true);
+			player.setcollisionState_T(false);
+		}
+
+		if (player.getcollisionState_R() == true && map.getGridNum() == 14)
+		{
+			map.setGridNum(5);
+			//map.updateMap(5);
+			player.teleport_right(true);
+			player.setcollisionState_R(false);
+		}
+
+		if (player.getcollisionState_D() == true && map.getGridNum() == 14)
+		{
+			this->map.setGridNum(17);
+			//map.updateMap(7);
+			player.teleport_down(true);
+			player.setcollisionState_D(false);
+		}
+
+		// Grid 5
+		if (player.getcollisionState_L() == true && map.getGridNum() == 5)
+		{
+			this->map.setGridNum(14);
+			//map.updateMap(4);
+			player.teleport_left(true);
+			player.setcollisionState_L(false);
+		}
+
+		if (player.getcollisionState_R() == true && map.getGridNum() == 5)
+		{
+			this->map.setGridNum(16);
+			//map.updateMap(6);
+			player.teleport_right(true);
+			player.setcollisionState_R(false);
+		}
+
+		if (player.getcollisionState_T() == true && map.getGridNum() == 5)
+		{
+			this->map.setGridNum(12);
+			//map.updateMap(2);
+			player.teleport_top(true);
+			player.setcollisionState_T(false);
+		}
+
+		if (player.getcollisionState_D() == true && map.getGridNum() == 5)
+		{
+			this->map.setGridNum(18);
+			//map.updateMap(8);
+			player.teleport_down(true);
+			player.setcollisionState_D(false);
+		}
+
+		// Grid 6
+		if (player.getcollisionState_L() == true && map.getGridNum() == 16)
+		{
+			map.setGridNum(5);
+			//map.updateMap(5);
+			player.teleport_left(true);
+			player.setcollisionState_L(false);
+		}
+
+		if (player.getcollisionState_T() == true && map.getGridNum() == 16)
+		{
+			this->map.setGridNum(13);
+			//map.updateMap(3);
+			player.teleport_top(true);
+			player.setcollisionState_T(false);
+		}
+
+		if (player.getcollisionState_D() == true && map.getGridNum() == 16)
+		{
+			this->map.setGridNum(19);
+			//map.updateMap(9);
+			player.teleport_down(true);
+			player.setcollisionState_D(false);
+		}
+
+		// Grid 7
+		if (player.getcollisionState_R() == true && map.getGridNum() == 17)
+		{
+			this->map.setGridNum(18);
+			//map.updateMap(8);
+			player.teleport_right(true);
+			player.setcollisionState_R(false);
+		}
+
+		if (player.getcollisionState_T() == true && map.getGridNum() == 17)
+		{
+			this->map.setGridNum(14);
+			//map.updateMap(4);
+			player.teleport_top(true);
+			player.setcollisionState_T(false);
+		}
+
+		// Grid 8
+		if (player.getcollisionState_L() == true && map.getGridNum() == 18)
+		{
+			this->map.setGridNum(17);
+			//map.updateMap(7);
+			player.teleport_left(true);
+			player.setcollisionState_L(false);
+		}
+
+		if (player.getcollisionState_R() == true && map.getGridNum() == 18)
+		{
+			this->map.setGridNum(19);
+			//map.updateMap(9);
+			player.teleport_right(true);
+			player.setcollisionState_R(false);
+		}
+
+		if (player.getcollisionState_T() == true && map.getGridNum() == 18)
+		{
+			map.setGridNum(5);
+			//map.updateMap(5);
+			player.teleport_top(true);
+			player.setcollisionState_T(false);
+		}
+
+		// Grid 9
+		if (player.getcollisionState_L() == true && map.getGridNum() == 19)
+		{
+			this->map.setGridNum(18);
+			//map.updateMap(8);
+			player.teleport_left(true);
+			player.setcollisionState_L(false);
+		}
+
+		if (player.getcollisionState_T() == true && map.getGridNum() == 19)
+		{
+			this->map.setGridNum(16);
+			//map.updateMap(6);
+			player.teleport_top(true);
+			player.setcollisionState_T(false);
+		}
 		player.setcollisionState_L(false);
-	}
-
-	if (player.getcollisionState_R() == true && map.getGridNum() == 5)
-	{
-		map.setGridNum(6);
-		//map.updateMap(6);
-		player.teleport_right(true);
 		player.setcollisionState_R(false);
-	}
-
-	if (player.getcollisionState_T() == true && map.getGridNum() == 5)
-	{
-		map.setGridNum(2);
-		//map.updateMap(2);
-		player.teleport_top(true);
 		player.setcollisionState_T(false);
-	}
-
-	if (player.getcollisionState_D() == true && map.getGridNum() == 5)
-	{
-		map.setGridNum(8);
-		//map.updateMap(8);
-		player.teleport_down(true);
 		player.setcollisionState_D(false);
-	}
-
-	// Grid 6
-	if (player.getcollisionState_L() == true && map.getGridNum() == 6)
-	{
-		map.setGridNum(5);
-		//map.updateMap(5);
-		player.teleport_left(true);
-		player.setcollisionState_L(false);
-	}
-
-	if (player.getcollisionState_T() == true && map.getGridNum() == 6)
-	{
-		map.setGridNum(3);
-		//map.updateMap(3);
-		player.teleport_top(true);
-		player.setcollisionState_T(false);
-	}
-
-	if (player.getcollisionState_D() == true && map.getGridNum() == 6)
-	{
-		map.setGridNum(9);
-		//map.updateMap(9);
-		player.teleport_down(true);
-		player.setcollisionState_D(false);
-	}
-
-	// Grid 7
-	if (player.getcollisionState_R() == true && map.getGridNum() == 7)
-	{
-		map.setGridNum(8);
-		//map.updateMap(8);
-		player.teleport_right(true);
-		player.setcollisionState_R(false);
-	}
-
-	if (player.getcollisionState_T() == true && map.getGridNum() == 7)
-	{
-		map.setGridNum(4);
-		//map.updateMap(4);
-		player.teleport_top(true);
-		player.setcollisionState_T(false);
-	}
-
-	// Grid 8
-	if (player.getcollisionState_L() == true && map.getGridNum() == 8)
-	{
-		map.setGridNum(7);
-		//map.updateMap(7);
-		player.teleport_left(true);
-		player.setcollisionState_L(false);
-	}
-
-	if (player.getcollisionState_R() == true && map.getGridNum() == 8)
-	{
-		map.setGridNum(9);
-		//map.updateMap(9);
-		player.teleport_right(true);
-		player.setcollisionState_R(false);
-	}
-
-	if (player.getcollisionState_T() == true && map.getGridNum() == 8)
-	{
-		map.setGridNum(5);
-		//map.updateMap(5);
-		player.teleport_top(true);
-		player.setcollisionState_T(false);
-	}
-
-	// Grid 9
-	if (player.getcollisionState_L() == true && map.getGridNum() == 9)
-	{
-		map.setGridNum(8);
-		//map.updateMap(8);
-		player.teleport_left(true);
-		player.setcollisionState_L(false);
-	}
-
-	if (player.getcollisionState_T() == true && map.getGridNum() == 9)
-	{
-		map.setGridNum(6);
-		//map.updateMap(6);
-		player.teleport_top(true);
-		player.setcollisionState_T(false);
 	}
 
 	//Reset Collision States
-	player.setcollisionState_L(false);
-	player.setcollisionState_R(false);
-	player.setcollisionState_T(false);
-	player.setcollisionState_D(false);
+
 }
 
 bool Game::collisionPoint()
@@ -647,6 +881,35 @@ void Game::input(int gameRound)
 			this->sfxFinal.play();
 		}
 		break;
+	case 11:
+		this->player.updatePlayer(-1);
+		while (this->lock11 == false)
+		{
+			this->sfxNox.play();
+			this->lock11 = true;
+			this->move = false;
+		}
+		TimerCount += elapsedTime.asSeconds();
+		if (TimerCount > 150.f && this->set11 == false)
+		{
+			this->set11 = true;
+			this->sfxAAA.play();
+			this->player.setAlpha(0);
+			this->bot1.setAlpha(0);
+			this->bot2.setAlpha(0);
+			this->bot3.setAlpha(0);
+			this->bot4.setAlpha(0);
+			this->bot5.setAlpha(0);
+			this->bot6.setAlpha(0);
+			this->bot7.setAlpha(0);
+			this->bot8.setAlpha(0);
+			this->bot9.setAlpha(0);
+			this->bot10.setAlpha(0);
+			this->sprite.setColor(sf::Color(255, 255, 255, 255));
+			this->sprite.setTexture(spook);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->set10 == false) this->window->close();
+		}
+		break;
 	}
 }
 
@@ -680,7 +943,6 @@ void Game::renderSet()
 		//this->point2.setAlpha(0);
 		input(2);
 		if (this->set2 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
-		this->map.updateMap(2);
 		this->player.updatePlayer(2);
 
 		if (this->bot_main.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
@@ -701,7 +963,6 @@ void Game::renderSet()
 	case 3:
 		input(3);
 		if (this->set3 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
-		this->map.updateMap(3);
 		this->player.updatePlayer(3);
 		if (this->bot_main.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
 		{
@@ -721,7 +982,6 @@ void Game::renderSet()
 	case 4:
 		input(4);
 		if (this->set4 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
-		this->map.updateMap(4);
 		this->player.updatePlayer(4);
 		if (this->bot_main.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
 		{
@@ -741,7 +1001,6 @@ void Game::renderSet()
 	case 5:
 		input(5);
 		if (this->set5 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
-		this->map.updateMap(5);
 		this->player.updatePlayer(5);
 		if (this->bot_main.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
 		{
@@ -761,7 +1020,6 @@ void Game::renderSet()
 	case 6:
 		input(6);
 		if (this->set6 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
-		this->map.updateMap(6);
 		this->player.updatePlayer(6);
 		if (this->bot_main.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
 		{
@@ -781,7 +1039,6 @@ void Game::renderSet()
 	case 7:
 		input(7);
 		if (this->set7 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
-		this->map.updateMap(7);
 		this->player.updatePlayer(7);
 		if (this->bot_main.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
 		{
@@ -801,7 +1058,6 @@ void Game::renderSet()
 	case 8:
 		input(8);
 		if (this->set8 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
-		this->map.updateMap(8);
 		this->player.updatePlayer(8);
 		if (this->bot_main.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
 		{
@@ -821,7 +1077,6 @@ void Game::renderSet()
 	case 9:
 		input(9);
 		if (this->set9 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
-		this->map.updateMap(9);
 		this->player.updatePlayer(9);
 		if (this->bot_main.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
 		{
@@ -832,15 +1087,13 @@ void Game::renderSet()
 			this->bot10.setGrid(5);
 			this->bot10.setSpawn(900, 330);
 			this->setGameRound(10);
+			this->map.setGridNum(11);
 		}
 		break;
 	case 10:
 		input(10);
 		if (this->set10 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
-		//this->whis.play();
-		this->map.updateMap(10);
 		this->player.updatePlayer(10);
-
 
 		if (this->map.getGridNum() == 5)
 		{
@@ -870,11 +1123,13 @@ void Game::renderSet()
 			this->bot9.setSpawn(770, 500);
 			if (this->collisionPoint() == true)
 			{
-				this->player.updatePlayer(-1);
-				this->move = false;
-				cout << "BOO!";
+				this->sfxFinal.pause();
+				this->setGameRound(11);
 			}
 		}
+		break;
+	case 11:
+		input(11);
 		break;
 	}
 }

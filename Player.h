@@ -55,6 +55,7 @@ public:
 	void updatePlayer(int updateNum);
 	int getUpdateNum();
 
+	void setAlpha(int num);
 
 	void updateInput();
 	void updateWindowBoundsCollision(const sf::RenderTarget* target);

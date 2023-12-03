@@ -39,6 +39,41 @@ void Map::initTex()
 	{
 		cout << endl << "Texture Not Found." << endl;
 	}
+
+	if (!this->fin1.loadFromFile("images\\Grid\\fin1.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	if (!this->fin2.loadFromFile("images\\Grid\\fin2.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	if (!this->fin3.loadFromFile("images\\Grid\\fin3.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	if (!this->fin4.loadFromFile("images\\Grid\\fin4.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	if (!this->fin6.loadFromFile("images\\Grid\\fin6.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	if (!this->fin7.loadFromFile("images\\Grid\\fin7.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	if (!this->fin8.loadFromFile("images\\Grid\\fin8.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	if (!this->fin9.loadFromFile("images\\Grid\\fin9.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+
+
 	grid1.setSmooth(1);
 	grid2.setSmooth(1);
 	grid3.setSmooth(1);
@@ -48,6 +83,15 @@ void Map::initTex()
 	grid7.setSmooth(1);
 	grid8.setSmooth(1);
 	grid9.setSmooth(1);
+
+	fin1.setSmooth(1);
+	fin2.setSmooth(1);
+	fin3.setSmooth(1);
+	fin4.setSmooth(1);
+	fin6.setSmooth(1);
+	fin7.setSmooth(1);
+	fin8.setSmooth(1);
+	fin9.setSmooth(1);
 }
 
 void Map::initSprite()
@@ -124,6 +168,30 @@ void Map::setGridMap()
 		break;
 	case 9:
 		this->sprite.setTexture(this->grid9);
+		break;
+	case 11:
+		this->sprite.setTexture(this->fin1);
+		break;
+	case 12:
+		this->sprite.setTexture(this->fin2);
+		break;
+	case 13:
+		this->sprite.setTexture(this->fin3);
+		break;
+	case 14:
+		this->sprite.setTexture(this->fin4);
+		break;
+	case 16:
+		this->sprite.setTexture(this->fin6);
+		break;
+	case 17:
+		this->sprite.setTexture(this->fin7);
+		break;
+	case 18:
+		this->sprite.setTexture(this->fin8);
+		break;
+	case 19:
+		this->sprite.setTexture(this->fin9);
 		break;
 	}
 }
