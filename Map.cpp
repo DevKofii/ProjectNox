@@ -3,19 +3,19 @@
 
 void Map::initTex()
 {
-	if (!this->grid1.loadFromFile("images\\Grid1.png"))
+	if (!this->grid1.loadFromFile("images\\Grid\\1.png"))
 	{
 		cout << endl << "Texture Not Found." << endl;
 	}
-	if (!this->grid2.loadFromFile("images\\Grid2.png"))
+	if (!this->grid2.loadFromFile("images\\Grid\\2.png"))
 	{
 		cout << endl << "Texture Not Found." << endl;
 	}
-	if (!this->grid3.loadFromFile("images\\Grid3.png"))
+	if (!this->grid3.loadFromFile("images\\Grid\\3.png"))
 	{
 		cout << endl << "Texture Not Found." << endl;
 	}
-	if (!this->grid4.loadFromFile("images\\Grid4.png"))
+	if (!this->grid4.loadFromFile("images\\Grid\\4.png"))
 	{
 		cout << endl << "Texture Not Found." << endl;
 	}
@@ -23,19 +23,19 @@ void Map::initTex()
 	{
 		cout << endl << "Texture Not Found." << endl;
 	}
-	if (!this->grid6.loadFromFile("images\\Grid6.png"))
+	if (!this->grid6.loadFromFile("images\\Grid\\6.png"))
 	{
 		cout << endl << "Texture Not Found." << endl;
 	}
-	if (!this->grid7.loadFromFile("images\\Grid7.png"))
+	if (!this->grid7.loadFromFile("images\\Grid\\7.png"))
 	{
 		cout << endl << "Texture Not Found." << endl;
 	}
-	if (!this->grid8.loadFromFile("images\\Grid8.png"))
+	if (!this->grid8.loadFromFile("images\\Grid\\8.png"))
 	{
 		cout << endl << "Texture Not Found." << endl;
 	}
-	if (!this->grid9.loadFromFile("images\\Grid9.png"))
+	if (!this->grid9.loadFromFile("images\\Grid\\9.png"))
 	{
 		cout << endl << "Texture Not Found." << endl;
 	}

@@ -11,8 +11,11 @@ using namespace std;
 class Player
 {
 private:
-	sf::Texture tex1_R, tex2_R, tex3_R, tex1_L, tex2_L, tex3_L;
+	sf::Texture tex1, tex2_R, tex3_R, tex4_R, tex5_R, fin_R, tex2_L, tex3_L, tex4_L, tex5_L, fin_L;
 	sf::Sprite sprite;
+
+	sf::SoundBuffer buffer;
+	sf::Sound walk;
 
 	float movementSpeed;
 	bool collidedLeft = false, collidedRight = false, collidedTop = false, collidedDown = false, collidePoint = false;
@@ -22,6 +25,7 @@ private:
 	void initSprite();
 	void initVariables();
 	void initShape();
+	void initSFX();
 
 public:
 	Player(float x = 640.f, float y = 360.f);

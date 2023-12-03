@@ -5,6 +5,8 @@ void Game::initVars()
 	this->window = nullptr;
 	this->endGame = false;
 	this->gameRound = 1;
+	this->move = true;
+
 	this->set1 = false;
 	this->set2 = false;
 	this->set3 = false;
@@ -50,10 +52,11 @@ void Game::initPoint()
 	this->bot7.updatePoint(2);
 	this->bot8.updatePoint(2);
 	this->bot9.updatePoint(2);
-	this->bot10.updatePoint(2);
+	this->bot10.updatePoint(1);
 
-	this->bot_main.randomGrid();
-	while (this->bot_main.getGrid() == 1) this->bot_main.randomGrid(); // In case point spawns on player spawn lol
+	//this->bot_main.randomGrid();
+	//while (this->bot_main.getGrid() == 1) this->bot_main.randomGrid(); // In case point spawns on player spawn lol
+	this->bot_main.setGrid(9);
 	this->bot1.setGrid(this->bot_main.getGrid());
 	this->bot_main.setLockGridState(this->bot_main.getGrid());
 	this->bot_main.randomSpawn();
@@ -136,7 +139,7 @@ void Game::initSFX()
 	buffer.loadFromFile("sfx\\stab.mp3");
 	stab.setBuffer(buffer);
 	stab.setLoop(0);
-	stab.setVolume(25.f);
+	stab.setVolume(20.f);
 
 	buf1.loadFromFile("voice\\One.mp3");
 	sfx1.setBuffer(buf1);
@@ -185,8 +188,13 @@ void Game::initSFX()
 
 	buf10.loadFromFile("voice\\Error.mp3");
 	sfx10.setBuffer(buf10);
-	sfx10.setLoop(0);
-	sfx10.setVolume(25.f);
+	sfx10.setLoop(1);
+	sfx10.setVolume(15.f);
+
+	whisp.loadFromFile("music\\Four Voices Whispering - Horror Film Sound Effects.mp3");
+	whis.setBuffer(whisp);
+	whis.setLoop(1);
+	whis.setVolume(15.f);
 }
 
 void Game::initMusic()
@@ -200,11 +208,10 @@ void Game::initMusic()
 	music.play();
 }
 
-Game::Game() : thread(&Game::renderSet, this)
+Game::Game()
 {
 	this->sprite.setPosition(0.f, 0.f);
 
-	this->thread.launch();
 	this->initVars();
 	this->initWindow();
 	this->initPoint();
@@ -461,6 +468,12 @@ bool Game::collisionPoint()
 		//cout << "It collided.";
 		return true;
 	}
+	if (player.collisionTest().intersects(bot10.collisionTest()))
+	{
+		//cout << "It collided.";
+		return true;
+
+	}
 	return false;
 }
 
@@ -483,12 +496,14 @@ void Game::input(int gameRound)
 		{
 			this->sfx1.play();
 			this->lock1 = true;
+			this->move = false;
 		}
 		this->sprite.setColor(sf::Color(255, 255, 255, 255));
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->set1 == false)
 		{
 			//this->sprite.setColor(sf::Color(255, 255, 255,  0));
 			this->set1 = true;
+			this->move = true;
 		}
 		break;
 	case 2:
@@ -496,12 +511,14 @@ void Game::input(int gameRound)
 		{
 			this->sfx2.play();
 			this->lock2 = true;
+			this->move = false;
 		}
 		this->sprite.setTexture(two);
 		this->sprite.setColor(sf::Color(255, 255, 255, 255));
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->set2 == false)
 		{
 			set2 = true;
+			this->move = true;
 		}
 		break;
 
@@ -510,12 +527,14 @@ void Game::input(int gameRound)
 		{
 			this->sfx3.play();
 			this->lock3 = true;
+			this->move = false;
 		}
 		this->sprite.setTexture(three);
 		this->sprite.setColor(sf::Color(255, 255, 255, 255));
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->set3 == false)
 		{
 			set3 = true;
+			this->move = true;
 		}
 		break;
 	case 4:
@@ -523,12 +542,14 @@ void Game::input(int gameRound)
 		{
 			this->sfx4.play();
 			this->lock4 = true;
+			this->move = false;
 		}
 		this->sprite.setTexture(four);
 		this->sprite.setColor(sf::Color(255, 255, 255, 255));
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->set4 == false)
 		{
 			set4 = true;
+			this->move = true;
 		}
 		break;
 	case 5:
@@ -536,12 +557,14 @@ void Game::input(int gameRound)
 		{
 			this->sfx5.play();
 			this->lock5 = true;
+			this->move = false;
 		}
 		this->sprite.setTexture(five);
 		this->sprite.setColor(sf::Color(255, 255, 255, 255));
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->set5 == false)
 		{
 			set5 = true;
+			this->move = true;
 		}
 		break;
 	case 6:
@@ -549,12 +572,14 @@ void Game::input(int gameRound)
 		{
 			this->sfx6.play();
 			this->lock6 = true;
+			this->move = false;
 		}
 		this->sprite.setTexture(six);
 		this->sprite.setColor(sf::Color(255, 255, 255, 255));
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->set6 == false)
 		{
 			set6 = true;
+			this->move = true;
 		}
 		break;
 	case 7:
@@ -562,12 +587,14 @@ void Game::input(int gameRound)
 		{
 			this->sfx7.play();
 			this->lock7 = true;
+			this->move = false;
 		}
 		this->sprite.setTexture(seven);
 		this->sprite.setColor(sf::Color(255, 255, 255, 255));
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->set7 == false)
 		{
 			set7 = true;
+			this->move = true;
 		}
 		break;
 	case 8:
@@ -575,12 +602,14 @@ void Game::input(int gameRound)
 		{
 			this->sfx8.play();
 			this->lock8 = true;
+			this->move = false;
 		}
 		this->sprite.setTexture(eight);
 		this->sprite.setColor(sf::Color(255, 255, 255, 255));
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->set8 == false)
 		{
 			set8 = true;
+			this->move = true;
 		}
 		break;
 	case 9:
@@ -588,25 +617,31 @@ void Game::input(int gameRound)
 		{
 			this->sfx9.play();
 			this->lock9 = true;
+			this->move = false;
 		}
 		this->sprite.setTexture(nine);
 		this->sprite.setColor(sf::Color(255, 255, 255, 255));
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->set9 == false)
 		{
 			set9 = true;
+			this->move = true;
 		}
 		break;
 	case 10:
+		this->music.stop();
 		while (this->lock10 == false)
 		{
 			this->sfx10.play();
 			this->lock10 = true;
+			this->move = false;
 		}
 		this->sprite.setTexture(findhim);
 		this->sprite.setColor(sf::Color(255, 255, 255, 255));
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->set10 == false)
 		{
+			this->sfx10.stop();
 			set10 = true;
+			this->move = true;
 		}
 		break;
 	}
@@ -626,8 +661,9 @@ void Game::renderSet()
 			this->stab.play();
 			this->bot_main.deletePoint();
 			this->bot1.setAlpha(255);
-			this->bot_main.randomGrid();
-			while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			//this->bot_main.randomGrid();
+			//while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			this->bot_main.setGrid(2);
 			this->bot2.setGrid(this->bot_main.getGrid());
 			this->bot_main.setLockGridState(this->bot_main.getGrid());
 			this->bot_main.randomSpawn();
@@ -649,8 +685,9 @@ void Game::renderSet()
 			this->stab.play();
 			this->bot_main.deletePoint();
 			this->bot2.setAlpha(255);
-			this->bot_main.randomGrid();
-			while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			//this->bot_main.randomGrid();
+			//while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			this->bot_main.setGrid(5);
 			this->bot3.setGrid(this->bot_main.getGrid());
 			this->bot_main.setLockGridState(this->bot_main.getGrid());
 			this->bot_main.randomSpawn();
@@ -668,8 +705,9 @@ void Game::renderSet()
 			this->stab.play();
 			this->bot_main.deletePoint();
 			this->bot3.setAlpha(255);
-			this->bot_main.randomGrid();
-			while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			//this->bot_main.randomGrid();
+			//while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			this->bot_main.setGrid(8);
 			this->bot4.setGrid(this->bot_main.getGrid()); //
 			this->bot_main.setLockGridState(this->bot_main.getGrid());
 			this->bot_main.randomSpawn();
@@ -687,8 +725,9 @@ void Game::renderSet()
 			this->stab.play();
 			this->bot_main.deletePoint();
 			this->bot4.setAlpha(255);
-			this->bot_main.randomGrid();
-			while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			//this->bot_main.randomGrid();
+			//while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			this->bot_main.setGrid(3);
 			this->bot5.setGrid(this->bot_main.getGrid()); //
 			this->bot_main.setLockGridState(this->bot_main.getGrid());
 			this->bot_main.randomSpawn();
@@ -706,8 +745,9 @@ void Game::renderSet()
 			this->stab.play();
 			this->bot_main.deletePoint();
 			this->bot5.setAlpha(255);
-			this->bot_main.randomGrid();
-			while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			//this->bot_main.randomGrid();
+			//while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			this->bot_main.setGrid(4);
 			this->bot6.setGrid(this->bot_main.getGrid()); //
 			this->bot_main.setLockGridState(this->bot_main.getGrid());
 			this->bot_main.randomSpawn();
@@ -725,8 +765,9 @@ void Game::renderSet()
 			this->stab.play();
 			this->bot_main.deletePoint();
 			this->bot6.setAlpha(255);
-			this->bot_main.randomGrid();
-			while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			//this->bot_main.randomGrid();
+			//while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			this->bot_main.setGrid(6);
 			this->bot7.setGrid(this->bot_main.getGrid()); //
 			this->bot_main.setLockGridState(this->bot_main.getGrid());
 			this->bot_main.randomSpawn();
@@ -744,8 +785,9 @@ void Game::renderSet()
 			this->stab.play();
 			this->bot_main.deletePoint();
 			this->bot7.setAlpha(255);
-			this->bot_main.randomGrid();
-			while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			//this->bot_main.randomGrid();
+			//while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			this->bot_main.setGrid(7);
 			this->bot8.setGrid(this->bot_main.getGrid()); //
 			this->bot_main.setLockGridState(this->bot_main.getGrid());
 			this->bot_main.randomSpawn();
@@ -763,12 +805,13 @@ void Game::renderSet()
 			this->stab.play();
 			this->bot_main.deletePoint();
 			this->bot8.setAlpha(255);
-			this->bot_main.randomGrid();
-			while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
-			this->bot8.setGrid(this->bot_main.getGrid()); //
+			//this->bot_main.randomGrid();
+			//while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
+			this->bot_main.setGrid(1);
+			this->bot9.setGrid(this->bot_main.getGrid()); //
 			this->bot_main.setLockGridState(this->bot_main.getGrid());
 			this->bot_main.randomSpawn();
-			this->bot8.setSpawn(this->bot_main.getXCoord(), this->bot_main.getYCoord()); //
+			this->bot9.setSpawn(this->bot_main.getXCoord(), this->bot_main.getYCoord()); //
 			this->setGameRound(9);
 		}
 		break;
@@ -781,21 +824,49 @@ void Game::renderSet()
 		{
 			this->stab.play();
 			this->bot_main.deletePoint();
+			this->bot_main.setAlpha(0);
 			this->bot9.setAlpha(255);
-			this->bot_main.randomGrid();
-			while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
-			this->bot10.setGrid(this->bot_main.getGrid()); //
-			this->bot_main.setLockGridState(this->bot_main.getGrid());
-			this->bot_main.randomSpawn();
-			this->bot10.setSpawn(this->bot_main.getXCoord(), this->bot_main.getYCoord()); //
+			this->bot10.setGrid(5);
+			this->bot10.setSpawn(900, 330);
 			this->setGameRound(10);
 		}
 		break;
 	case 10:
 		input(10);
 		if (this->set10 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
+		this->whis.play();
 		this->map.updateMap(10);
 		this->player.updatePlayer(10);
+
+		if (this->map.getGridNum() == 5)
+		{
+			this->whis.setVolume(35.f);
+
+			this->bot1.setGrid(5);
+			this->bot2.setGrid(5);
+			this->bot3.setGrid(5);
+			this->bot1.setSpawn(510, 220);
+			this->bot2.setSpawn(640, 220);
+			this->bot3.setSpawn(770, 220);
+
+			this->bot4.setGrid(5);
+			this->bot5.setGrid(5);
+			this->bot6.setGrid(5);
+			this->bot4.setSpawn(510, 360);
+			this->bot5.setSpawn(640, 360);
+			this->bot6.setSpawn(770, 360);
+
+			this->bot7.setGrid(5);
+			this->bot8.setGrid(5);
+			this->bot9.setGrid(5);
+			this->bot7.setSpawn(510, 500);
+			this->bot8.setSpawn(640, 500);
+			this->bot9.setSpawn(770, 500);
+			if (this->collisionPoint() == true)
+			{
+				cout << "BOO!";
+			}
+		}
 		break;
 	}
 }
@@ -804,7 +875,7 @@ void Game::update()
 {
 	this->pollEvents();
 	this->map.update(this->window);
-	this->player.update(this->window);
+	if(this->move == true) this->player.update(this->window);
 	this->collisionStates();
 	this->collisionPoint();
 }
@@ -817,7 +888,6 @@ void Game::render()
 	this->renderSet();
 
 	this->map.render(this->window);
-	this->player.render(this->window);
 	this->window->draw(this->sprite);
 	if (this->bot_main.getGrid() == this->map.getGridNum()) this->bot_main.render(this->window);
 	if (this->bot1.getGrid() == this->map.getGridNum()) this->bot1.render(this->window);
@@ -830,6 +900,7 @@ void Game::render()
 	if (this->bot8.getGrid() == this->map.getGridNum()) this->bot8.render(this->window);
 	if (this->bot9.getGrid() == this->map.getGridNum()) this->bot9.render(this->window);
 	if (this->bot10.getGrid() == this->map.getGridNum()) this->bot10.render(this->window);
+	this->player.render(this->window);
 
 	//Debugs
 	//cout << this->getGameRound();

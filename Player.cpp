@@ -2,41 +2,67 @@
 
 void Player::initTex()
 {
-	if (!this->tex1_R.loadFromFile("images\\player1_R.png"))
+	if (!this->tex1.loadFromFile("images\\Stage1.png"))
 	{
 		cout << endl << "Texture Not Found." << endl;
 	}
-	if (!this->tex2_R.loadFromFile("images\\player2_R.png"))
+	if (!this->tex2_R.loadFromFile("images\\Stage2_R.png"))
 	{
 		cout << endl << "Texture Not Found." << endl;
 	}
-	if (!this->tex3_R.loadFromFile("images\\player3_R.png"))
+	if (!this->tex3_R.loadFromFile("images\\Stage3_R.png"))
 	{
 		cout << endl << "Texture Not Found." << endl;
 	}
-	if (!this->tex1_L.loadFromFile("images\\player1_L.png"))
+	if (!this->tex4_R.loadFromFile("images\\Stage4_R.png"))
 	{
 		cout << endl << "Texture Not Found." << endl;
 	}
-	if (!this->tex2_L.loadFromFile("images\\player2_L.png"))
+	if (!this->tex5_R.loadFromFile("images\\Stage5_R.png"))
 	{
 		cout << endl << "Texture Not Found." << endl;
 	}
-	if (!this->tex3_L.loadFromFile("images\\player3_L.png"))
+	if (!this->fin_R.loadFromFile("images\\Final_R.png"))
 	{
 		cout << endl << "Texture Not Found." << endl;
 	}
-	tex1_R.setSmooth(1);
+	if (!this->tex2_L.loadFromFile("images\\Stage2_L.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	if (!this->tex3_L.loadFromFile("images\\Stage3_L.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	if (!this->tex4_L.loadFromFile("images\\Stage4_L.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	if (!this->tex5_L.loadFromFile("images\\Stage5_L.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	if (!this->fin_L.loadFromFile("images\\Final_L.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
+	tex1.setSmooth(1);
 	tex2_R.setSmooth(1);
 	tex3_R.setSmooth(1);
-	tex1_L.setSmooth(1);
+	tex4_R.setSmooth(1);
+	tex5_R.setSmooth(1);
+	fin_R.setSmooth(1);
+
 	tex2_L.setSmooth(1);
 	tex3_L.setSmooth(1);
+	tex4_L.setSmooth(1);
+	tex5_L.setSmooth(1);
+	fin_L.setSmooth(1);
 }
 
 void Player::initSprite()
 {
-	this->sprite.setTexture(this->tex1_R);
+	this->sprite.setTexture(this->tex1);
 }
 
 void Player::initVariables()
@@ -54,6 +80,11 @@ void Player::initShape()
 	//this->shape.setScale(sf::Vector2f(0.5f, 0.5f));
 }
 
+void Player::initSFX()
+{
+
+}
+
 Player::Player(float x, float y)
 {
 	this->sprite.setPosition(x, y);
@@ -62,6 +93,7 @@ Player::Player(float x, float y)
 	this->initSprite();
 	this->initVariables();
 	this->initShape();
+	this->initSFX();
 }
 
 Player::~Player()
@@ -165,30 +197,35 @@ void Player::updatePlayer(int updateNum)
 		this->updateNum = 1;
 		break;
 	case 2:
+		this->sprite.setTextureRect(sf::IntRect(0, 0, 35, 102));
 		this->updateNum = 2;
 		break;
 	case 3:
 		this->updateNum = 3;
 		break;
 	case 4:
+		this->sprite.setTextureRect(sf::IntRect(0, 0, 48, 122));
 		this->updateNum = 4;
 		break;
 	case 5:
 		this->updateNum = 5;
 		break;
 	case 6:
+		this->sprite.setTextureRect(sf::IntRect(0, 0, 62, 143));
 		this->updateNum = 6;
 		break;
 	case 7:
 		this->updateNum = 7;
 		break;
 	case 8:
+		this->sprite.setTextureRect(sf::IntRect(0, 0, 68, 143));
 		this->updateNum = 8;
 		break;
 	case 9:
 		this->updateNum = 9;
 		break;
 	case 10:
+		this->sprite.setTextureRect(sf::IntRect(0, 0, 82, 143));
 		this->updateNum = 10;
 		break;
 	}
@@ -205,16 +242,22 @@ void Player::updateInput()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) // Move Left | A
 	{
 		this->sprite.move(-this->movementSpeed, 0.f);
-		if (this->getUpdateNum() == 1) this->sprite.setTexture(this->tex1_L);
-		else if (this->getUpdateNum() == 2) this->sprite.setTexture(this->tex2_L);
-		else if (this->getUpdateNum() == 3) this->sprite.setTexture(this->tex3_L);
+		if (this->getUpdateNum() == 1) this->sprite.setTexture(this->tex1);
+		if (this->getUpdateNum() == 2 || this->getUpdateNum() == 3) this->sprite.setTexture(this->tex2_L);
+		if (this->getUpdateNum() == 4 || this->getUpdateNum() == 5) this->sprite.setTexture(this->tex3_L);
+		if (this->getUpdateNum() == 6 || this->getUpdateNum() == 7) this->sprite.setTexture(this->tex4_L);
+		if (this->getUpdateNum() == 8 || this->getUpdateNum() == 9) this->sprite.setTexture(this->tex5_L);
+		if (this->getUpdateNum() == 10) this->sprite.setTexture(this->fin_L);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) // Move Right | D
 	{
 		this->sprite.move(this->movementSpeed, 0.f);
-		if (this->getUpdateNum() == 1) this->sprite.setTexture(this->tex1_R);
-		else if (this->getUpdateNum() == 2) this->sprite.setTexture(this->tex2_R);
-		else if (this->getUpdateNum() == 3) this->sprite.setTexture(this->tex3_R);
+		if (this->getUpdateNum() == 1) this->sprite.setTexture(this->tex1);
+		if (this->getUpdateNum() == 2 || this->getUpdateNum() == 3) this->sprite.setTexture(this->tex2_R);
+		if (this->getUpdateNum() == 4 || this->getUpdateNum() == 5) this->sprite.setTexture(this->tex3_R);
+		if (this->getUpdateNum() == 6 || this->getUpdateNum() == 7) this->sprite.setTexture(this->tex4_R);
+		if (this->getUpdateNum() == 8 || this->getUpdateNum() == 9) this->sprite.setTexture(this->tex5_R);
+		if (this->getUpdateNum() == 10) this->sprite.setTexture(this->fin_R);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) // Move Up | W
 	{

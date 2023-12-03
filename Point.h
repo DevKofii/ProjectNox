@@ -13,7 +13,7 @@ using namespace std;
 class Point
 {
 private:
-	sf::Texture enemy,enemy_dead;
+	sf::Texture enemy,enemy_dead,priest;
 	sf::Sprite sprite;
 	//sf::RectangleShape pointShape;
 	float x= 0.f, y = 0.f;

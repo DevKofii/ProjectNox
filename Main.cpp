@@ -11,7 +11,7 @@ int main(int argc, char** argv)
     signed int ss_y = dis_y / 2;
 
     Menu menu;
-    sf::Glyph;
+    sf::Glyph glyph;
    
     while (menu.getWindowIsOpen())
     {

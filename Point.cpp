@@ -31,8 +31,13 @@ void Point::initTex()
 	{
 		cout << endl << "Texture Not Found." << endl;
 	}
+	if (!this->priest.loadFromFile("images\\Priest.png"))
+	{
+		cout << endl << "Texture Not Found." << endl;
+	}
 	enemy.setSmooth(1);
 	enemy_dead.setSmooth(1);
+	priest.setSmooth(1);
 }
 
 Point::Point()
@@ -107,6 +112,11 @@ void Point::updatePoint(int updatePoint)
 		this->sprite.setColor(sf::Color(255,255,255,0));
 		//this->pointShape.setFillColor(sf::Color::White);
 		break;
+	case 3:
+		break;
+		this->updateNum = 3;
+		this->sprite.setTexture(this->priest);
+		this->sprite.setColor(sf::Color(255, 255, 255, 255));
 	}
 }
 
