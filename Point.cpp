@@ -2,8 +2,6 @@
 
 void Point::initShape()
 {
-	//this->pointShape.setFillColor(sf::Color::White);
-	//this->pointShape.setSize(sf::Vector2f(100.f, 100.f));
 	this->sprite.setScale(sf::Vector2f(0.7f, 0.7f));
 }
 
@@ -45,16 +43,7 @@ Point::Point()
 	this->sprite.setPosition(-10, -10);
 
 	this->initTex();
-	this->initSprite();
 	this->initShape();
-}
-
-void Point::initSprite()
-{
-}
-
-Point::~Point()
-{
 }
 
 void Point::randomSpawn()
@@ -62,10 +51,6 @@ void Point::randomSpawn()
 	srand(time(NULL));
 	this->setXCoord(this->x);
 	this->setYCoord(this->y);
-	//float x = (rand() % (880 - 280 + 1)) + 280;
-	//float y = (rand() % (520 - 120 + 1)) + 120;
-	//float x = rand() % 1080 + 100;
-	//float y = rand() % 720 + 50;
 	this->sprite.setPosition(this->x, this->y);
 }
 
@@ -87,7 +72,6 @@ int Point::getGrid()
 
 void Point::deletePoint()
 {
-	//this->pointShape.setFillColor(sf::Color::Transparent);
 	this->sprite.setPosition(-10, -10);
 }
 
@@ -104,13 +88,11 @@ void Point::updatePoint(int updatePoint)
 	case 1:
 		this->updateNum = 1;
 		this->sprite.setTexture(this->enemy);
-		//this->pointShape.setFillColor(sf::Color::White);
 		break;
 	case 2:
 		this->updateNum = 2;
 		this->sprite.setTexture(this->enemy_dead);
 		this->sprite.setColor(sf::Color(255,255,255,0));
-		//this->pointShape.setFillColor(sf::Color::White);
 		break;
 	case 3:
 		break;

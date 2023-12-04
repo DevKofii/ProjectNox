@@ -15,20 +15,17 @@ class Point
 private:
 	sf::Texture enemy,enemy_dead,priest;
 	sf::Sprite sprite;
-	//sf::RectangleShape pointShape;
 	float x= 0.f, y = 0.f;
 	int randGridNum;
 	int updateNum;
 	bool lock1 = false, lock2 = false, lock3 = false, lock4 = false, lock5 = false, lock6 = false, lock7 = false, lock8 = false, lock9 = false;
 
 	void initTex();
-	void initSprite();
 	void initVariables();
 	void initShape();
 public:
 
 	Point();
-	virtual ~Point();
 
 	void randomSpawn();
 	void randomGrid();

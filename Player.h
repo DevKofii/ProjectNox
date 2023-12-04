@@ -25,11 +25,9 @@ private:
 	void initSprite();
 	void initVariables();
 	void initShape();
-	void initSFX();
 
 public:
 	Player(float x = 640.f, float y = 360.f);
-	virtual ~Player();
 
 	bool getcollisionState_L();
 	bool getcollisionState_R();

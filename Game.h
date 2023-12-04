@@ -19,7 +19,7 @@ class Game {
 private:
 	//Variables
 	sf::RenderWindow* window;
-	sf::VideoMode videoMode; //videoMode : VideoMode
+	sf::VideoMode videoMode;
 	sf::Event sfmlEvent;
 	sf::Texture one, two, three, four, five, six, seven, eight, nine, findhim, spook;
 	sf::Sprite sprite;
@@ -35,11 +35,10 @@ private:
 	bool endGame, set1, set2, set3, set4, set5, set6, set7, set8, set9, set10, set11,
 	lock1, lock2, lock3, lock4, lock5, lock6, lock7, lock8, lock9, lock10, lock11, move;
 
-	int gameRound = 1; //gameRound : int = 1
+	int gameRound = 1;
 	sf::Vector2f num;
 
 	//Game Objects
-	//sf::RectangleShape enemy;
 	Map map;
 	Player player;
 	Point bot_main, bot1, bot2, bot3, bot4, bot5, bot6, bot7, bot8, bot9, bot10, bot_hitbox;
@@ -56,13 +55,13 @@ private:
 public:
 	//Constructors
 	Game();
-	virtual ~Game(); // ~Game() : virtual
+	virtual ~Game(); 
 	 
 	//Accessors
 	const bool getWindowIsOpen() const;
 
 	//Functions
-	void pollEvents(); //pollEvents() : void
+	void pollEvents(); 
 	void collisionStates();
 	bool collisionPoint();
 

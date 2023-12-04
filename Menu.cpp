@@ -10,7 +10,6 @@ void Menu::initWindow()
 	this->videoMode.width = 1280;
 	this->videoMode.height = 720;
 	this->menuWindow = new sf::RenderWindow(this->videoMode, "Project Nox", sf::Style::Titlebar | sf::Style::Close);
-	//this->window->setVerticalSyncEnabled(true);
 	this->menuWindow->setFramerateLimit(60);
 }
 
@@ -119,8 +118,6 @@ void Menu::pollEvents()
 				this->menuWindow->close();
 			break;
 		case sf::Event::MouseMoved:
-			//cout << endl << "X: " << sfmlEvent.mouseMove.x;
-			//cout << endl << "Y: " << this->sfmlEvent.mouseMove.y;
 			switch (state)
 			{
 			case 1:
@@ -166,7 +163,6 @@ void Menu::pollEvents()
 					if (this->sfmlEvent.mouseButton.button == sf::Mouse::Left)
 					{
 						this->close.play();
-						//cout << endl << "Click!";
 						this->music.play();
 						this->sprite.setTexture(this->main1);
 						this->state = 2;
@@ -179,7 +175,6 @@ void Menu::pollEvents()
 				{
 					if (this->sfmlEvent.mouseButton.button == sf::Mouse::Left)
 					{
-						//cout << endl << "Click!";
 						this->select.play();
 						this->state = 3;
 						this->music.stop();
@@ -191,7 +186,6 @@ void Menu::pollEvents()
 				{
 					if (this->sfmlEvent.mouseButton.button == sf::Mouse::Left)
 					{
-						//cout << endl << "Click!";
 						this->select.play();
 						this->state = 4;
 						this->music.stop();

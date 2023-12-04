@@ -32,7 +32,6 @@ void Game::initVars()
 	this->lock11 = false;
 
 	this->elapsedTime = this->m_clock.restart();
-	//this->point.display(); Debug
 }
 
 void Game::initWindow()
@@ -40,7 +39,6 @@ void Game::initWindow()
 	this->videoMode.width = 1280;
 	this->videoMode.height = 720;
 	this->window = new sf::RenderWindow(this->videoMode, "Project Nox", sf::Style::Titlebar | sf::Style::Close);
-	//this->window->setVerticalSyncEnabled(true);
 	this->window->setFramerateLimit(60);
 }
 
@@ -59,26 +57,11 @@ void Game::initPoint()
 	this->bot10.updatePoint(1);
 
 	this->bot_hitbox.updatePoint(2);
-
-	//this->bot_main.randomGrid();
-	//while (this->bot_main.getGrid() == 1) this->bot_main.randomGrid(); // In case point spawns on player spawn lol
 	this->bot_main.setGrid(9);
 	this->bot1.setGrid(this->bot_main.getGrid());
 	this->bot_main.setLockGridState(this->bot_main.getGrid());
 	this->bot_main.randomSpawn();
 	this->bot1.setSpawn(this->bot_main.getXCoord(), this->bot_main.getYCoord());
-	//cout << endl << "Point At: " << this->point.getGrid() << endl;
-	/*
-	cout << endl << "Grid 1: " << this->point1.getLockState(1) << endl;
-	cout << endl << "Grid 2: " << this->point1.getLockState(2) << endl;
-	cout << endl << "Grid 3: " << this->point1.getLockState(3) << endl;
-	cout << endl << "Grid 4: " << this->point1.getLockState(4) << endl;
-	cout << endl << "Grid 5: " << this->point1.getLockState(5) << endl;
-	cout << endl << "Grid 6: " << this->point1.getLockState(6) << endl;
-	cout << endl << "Grid 7: " << this->point1.getLockState(7) << endl;
-	cout << endl << "Grid 8: " << this->point1.getLockState(8) << endl;
-	cout << endl << "Grid 9: " << this->point1.getLockState(9) << endl;
-	*/
 }
 
 void Game::initTex()
@@ -286,7 +269,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_R() == true && map.getGridNum() == 1)
 		{
 			map.setGridNum(2);
-			//map.updateMap(2);
 			player.teleport_right(true);
 			player.setcollisionState_R(false);
 		}
@@ -294,7 +276,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_D() == true && map.getGridNum() == 1)
 		{
 			map.setGridNum(4);
-			//map.updateMap(4);
 			player.teleport_down(true);
 			player.setcollisionState_D(false);
 		}
@@ -303,7 +284,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_L() == true && map.getGridNum() == 2)
 		{
 			map.setGridNum(1);
-			//map.updateMap(1);
 			player.teleport_left(true);
 			player.setcollisionState_L(false);
 		}
@@ -311,7 +291,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_R() == true && map.getGridNum() == 2)
 		{
 			map.setGridNum(3);
-			//map.updateMap(3);
 			player.teleport_right(true);
 			player.setcollisionState_R(false);
 		}
@@ -319,7 +298,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_D() == true && map.getGridNum() == 2)
 		{
 			map.setGridNum(5);
-			//map.updateMap(5);
 			player.teleport_down(true);
 			player.setcollisionState_D(false);
 		}
@@ -328,14 +306,12 @@ void Game::collisionStates()
 		if (player.getcollisionState_L() == true && map.getGridNum() == 3)
 		{
 			map.setGridNum(2);
-			//map.updateMap(2);
 			player.teleport_left(true);
 		}
 
 		if (player.getcollisionState_D() == true && map.getGridNum() == 3)
 		{
 			map.setGridNum(6);
-			//map.updateMap(6);
 			player.teleport_down(true);
 			player.setcollisionState_D(false);
 		}
@@ -344,7 +320,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_T() == true && map.getGridNum() == 4)
 		{
 			map.setGridNum(1);
-			//map.updateMap(1);
 			player.teleport_top(true);
 			player.setcollisionState_T(false);
 		}
@@ -352,7 +327,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_R() == true && map.getGridNum() == 4)
 		{
 			map.setGridNum(5);
-			//map.updateMap(5);
 			player.teleport_right(true);
 			player.setcollisionState_R(false);
 		}
@@ -360,7 +334,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_D() == true && map.getGridNum() == 4)
 		{
 			map.setGridNum(7);
-			//map.updateMap(7);
 			player.teleport_down(true);
 			player.setcollisionState_D(false);
 		}
@@ -369,7 +342,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_L() == true && map.getGridNum() == 5)
 		{
 			map.setGridNum(4);
-			//map.updateMap(4);
 			player.teleport_left(true);
 			player.setcollisionState_L(false);
 		}
@@ -377,7 +349,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_R() == true && map.getGridNum() == 5)
 		{
 			map.setGridNum(6);
-			//map.updateMap(6);
 			player.teleport_right(true);
 			player.setcollisionState_R(false);
 		}
@@ -385,7 +356,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_T() == true && map.getGridNum() == 5)
 		{
 			map.setGridNum(2);
-			//map.updateMap(2);
 			player.teleport_top(true);
 			player.setcollisionState_T(false);
 		}
@@ -393,7 +363,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_D() == true && map.getGridNum() == 5)
 		{
 			map.setGridNum(8);
-			//map.updateMap(8);
 			player.teleport_down(true);
 			player.setcollisionState_D(false);
 		}
@@ -402,7 +371,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_L() == true && map.getGridNum() == 6)
 		{
 			map.setGridNum(5);
-			//map.updateMap(5);
 			player.teleport_left(true);
 			player.setcollisionState_L(false);
 		}
@@ -410,7 +378,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_T() == true && map.getGridNum() == 6)
 		{
 			map.setGridNum(3);
-			//map.updateMap(3);
 			player.teleport_top(true);
 			player.setcollisionState_T(false);
 		}
@@ -418,7 +385,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_D() == true && map.getGridNum() == 6)
 		{
 			map.setGridNum(9);
-			//map.updateMap(9);
 			player.teleport_down(true);
 			player.setcollisionState_D(false);
 		}
@@ -427,7 +393,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_R() == true && map.getGridNum() == 7)
 		{
 			map.setGridNum(8);
-			//map.updateMap(8);
 			player.teleport_right(true);
 			player.setcollisionState_R(false);
 		}
@@ -435,7 +400,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_T() == true && map.getGridNum() == 7)
 		{
 			map.setGridNum(4);
-			//map.updateMap(4);
 			player.teleport_top(true);
 			player.setcollisionState_T(false);
 		}
@@ -444,7 +408,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_L() == true && map.getGridNum() == 8)
 		{
 			map.setGridNum(7);
-			//map.updateMap(7);
 			player.teleport_left(true);
 			player.setcollisionState_L(false);
 		}
@@ -452,7 +415,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_R() == true && map.getGridNum() == 8)
 		{
 			map.setGridNum(9);
-			//map.updateMap(9);
 			player.teleport_right(true);
 			player.setcollisionState_R(false);
 		}
@@ -460,7 +422,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_T() == true && map.getGridNum() == 8)
 		{
 			map.setGridNum(5);
-			//map.updateMap(5);
 			player.teleport_top(true);
 			player.setcollisionState_T(false);
 		}
@@ -469,7 +430,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_L() == true && map.getGridNum() == 9)
 		{
 			map.setGridNum(8);
-			//map.updateMap(8);
 			player.teleport_left(true);
 			player.setcollisionState_L(false);
 		}
@@ -477,7 +437,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_T() == true && map.getGridNum() == 9)
 		{
 			map.setGridNum(6);
-			//map.updateMap(6);
 			player.teleport_top(true);
 			player.setcollisionState_T(false);
 		}
@@ -492,7 +451,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_R() == true && map.getGridNum() == 11)
 		{
 			this->map.setGridNum(12);
-			//map.updateMap(2);
 			player.teleport_right(true);
 			player.setcollisionState_R(false);
 		}
@@ -500,7 +458,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_D() == true && map.getGridNum() == 11)
 		{
 			this->map.setGridNum(14);
-			//map.updateMap(4);
 			player.teleport_down(true);
 			player.setcollisionState_D(false);
 		}
@@ -509,7 +466,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_L() == true && map.getGridNum() == 12)
 		{
 			this->map.setGridNum(11);
-			//map.updateMap(1);
 			player.teleport_left(true);
 			player.setcollisionState_L(false);
 		}
@@ -517,7 +473,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_R() == true && map.getGridNum() == 12)
 		{
 			this->map.setGridNum(13);
-			//map.updateMap(3);
 			player.teleport_right(true);
 			player.setcollisionState_R(false);
 		}
@@ -525,7 +480,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_D() == true && map.getGridNum() == 12)
 		{
 			map.setGridNum(5);
-			//map.updateMap(5);
 			player.teleport_down(true);
 			player.setcollisionState_D(false);
 		}
@@ -534,14 +488,12 @@ void Game::collisionStates()
 		if (player.getcollisionState_L() == true && map.getGridNum() == 13)
 		{
 			this->map.setGridNum(12);
-			//map.updateMap(2);
 			player.teleport_left(true);
 		}
 
 		if (player.getcollisionState_D() == true && map.getGridNum() == 13)
 		{
 			this->map.setGridNum(16);
-			//map.updateMap(6);
 			player.teleport_down(true);
 			player.setcollisionState_D(false);
 		}
@@ -550,15 +502,13 @@ void Game::collisionStates()
 		if (player.getcollisionState_T() == true && map.getGridNum() == 14)
 		{
 			this->map.setGridNum(11);
-			//map.updateMap(1);
 			player.teleport_top(true);
 			player.setcollisionState_T(false);
 		}
 
 		if (player.getcollisionState_R() == true && map.getGridNum() == 14)
 		{
-			map.setGridNum(5);
-			//map.updateMap(5);
+			map.setGridNum(5); 
 			player.teleport_right(true);
 			player.setcollisionState_R(false);
 		}
@@ -566,7 +516,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_D() == true && map.getGridNum() == 14)
 		{
 			this->map.setGridNum(17);
-			//map.updateMap(7);
 			player.teleport_down(true);
 			player.setcollisionState_D(false);
 		}
@@ -575,7 +524,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_L() == true && map.getGridNum() == 5)
 		{
 			this->map.setGridNum(14);
-			//map.updateMap(4);
 			player.teleport_left(true);
 			player.setcollisionState_L(false);
 		}
@@ -583,7 +531,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_R() == true && map.getGridNum() == 5)
 		{
 			this->map.setGridNum(16);
-			//map.updateMap(6);
 			player.teleport_right(true);
 			player.setcollisionState_R(false);
 		}
@@ -591,7 +538,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_T() == true && map.getGridNum() == 5)
 		{
 			this->map.setGridNum(12);
-			//map.updateMap(2);
 			player.teleport_top(true);
 			player.setcollisionState_T(false);
 		}
@@ -599,7 +545,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_D() == true && map.getGridNum() == 5)
 		{
 			this->map.setGridNum(18);
-			//map.updateMap(8);
 			player.teleport_down(true);
 			player.setcollisionState_D(false);
 		}
@@ -608,7 +553,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_L() == true && map.getGridNum() == 16)
 		{
 			map.setGridNum(5);
-			//map.updateMap(5);
 			player.teleport_left(true);
 			player.setcollisionState_L(false);
 		}
@@ -616,7 +560,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_T() == true && map.getGridNum() == 16)
 		{
 			this->map.setGridNum(13);
-			//map.updateMap(3);
 			player.teleport_top(true);
 			player.setcollisionState_T(false);
 		}
@@ -624,7 +567,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_D() == true && map.getGridNum() == 16)
 		{
 			this->map.setGridNum(19);
-			//map.updateMap(9);
 			player.teleport_down(true);
 			player.setcollisionState_D(false);
 		}
@@ -633,7 +575,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_R() == true && map.getGridNum() == 17)
 		{
 			this->map.setGridNum(18);
-			//map.updateMap(8);
 			player.teleport_right(true);
 			player.setcollisionState_R(false);
 		}
@@ -641,7 +582,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_T() == true && map.getGridNum() == 17)
 		{
 			this->map.setGridNum(14);
-			//map.updateMap(4);
 			player.teleport_top(true);
 			player.setcollisionState_T(false);
 		}
@@ -650,7 +590,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_L() == true && map.getGridNum() == 18)
 		{
 			this->map.setGridNum(17);
-			//map.updateMap(7);
 			player.teleport_left(true);
 			player.setcollisionState_L(false);
 		}
@@ -658,7 +597,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_R() == true && map.getGridNum() == 18)
 		{
 			this->map.setGridNum(19);
-			//map.updateMap(9);
 			player.teleport_right(true);
 			player.setcollisionState_R(false);
 		}
@@ -666,7 +604,6 @@ void Game::collisionStates()
 		if (player.getcollisionState_T() == true && map.getGridNum() == 18)
 		{
 			map.setGridNum(5);
-			//map.updateMap(5);
 			player.teleport_top(true);
 			player.setcollisionState_T(false);
 		}
@@ -675,15 +612,13 @@ void Game::collisionStates()
 		if (player.getcollisionState_L() == true && map.getGridNum() == 19)
 		{
 			this->map.setGridNum(18);
-			//map.updateMap(8);
 			player.teleport_left(true);
 			player.setcollisionState_L(false);
 		}
 
 		if (player.getcollisionState_T() == true && map.getGridNum() == 19)
 		{
-			this->map.setGridNum(16);
-			//map.updateMap(6);
+			this->map.setGridNum(16); 
 			player.teleport_top(true);
 			player.setcollisionState_T(false);
 		}
@@ -701,12 +636,10 @@ bool Game::collisionPoint()
 {
 	if (player.collisionTest().intersects(this->bot_main.collisionTest()))
 	{
-		//cout << "It collided.";
 		return true;
 	}
 	if (player.collisionTest().intersects(this->bot_hitbox.collisionTest()))
 	{
-		//cout << "It collided.";
 		return true;
 
 	}
@@ -737,7 +670,6 @@ void Game::input(int gameRound)
 		this->sprite.setColor(sf::Color(255, 255, 255, 255));
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->set1 == false)
 		{
-			//this->sprite.setColor(sf::Color(255, 255, 255,  0));
 			this->set1 = true;
 			this->move = true;
 		}
@@ -921,14 +853,11 @@ void Game::renderSet()
 		input(1);
 		if (this->set1 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
 		this->player.updatePlayer(1);
-		//set Vars for Round1
 		if (this->bot_main.getGrid() == this->map.getGridNum() && this->collisionPoint() == true)
 		{
 			this->stab.play();
 			this->bot_main.deletePoint();
 			this->bot1.setAlpha(255);
-			//this->bot_main.randomGrid();
-			//while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
 			this->bot_main.setGrid(2);
 			this->bot2.setGrid(this->bot_main.getGrid());
 			this->bot_main.setLockGridState(this->bot_main.getGrid());
@@ -938,9 +867,6 @@ void Game::renderSet()
 		}
 		break;
 	case 2:
-		//set Vars for Round2
-		//Transfers Player to a different Round
-		//this->point2.setAlpha(0);
 		input(2);
 		if (this->set2 == true) this->sprite.setColor(sf::Color(255, 255, 255, 0));
 		this->player.updatePlayer(2);
@@ -950,8 +876,6 @@ void Game::renderSet()
 			this->stab.play();
 			this->bot_main.deletePoint();
 			this->bot2.setAlpha(255);
-			//this->bot_main.randomGrid();
-			//while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
 			this->bot_main.setGrid(5);
 			this->bot3.setGrid(this->bot_main.getGrid());
 			this->bot_main.setLockGridState(this->bot_main.getGrid());
@@ -969,8 +893,6 @@ void Game::renderSet()
 			this->stab.play();
 			this->bot_main.deletePoint();
 			this->bot3.setAlpha(255);
-			//this->bot_main.randomGrid();
-			//while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
 			this->bot_main.setGrid(8);
 			this->bot4.setGrid(this->bot_main.getGrid()); //
 			this->bot_main.setLockGridState(this->bot_main.getGrid());
@@ -988,8 +910,6 @@ void Game::renderSet()
 			this->stab.play();
 			this->bot_main.deletePoint();
 			this->bot4.setAlpha(255);
-			//this->bot_main.randomGrid();
-			//while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
 			this->bot_main.setGrid(3);
 			this->bot5.setGrid(this->bot_main.getGrid()); //
 			this->bot_main.setLockGridState(this->bot_main.getGrid());
@@ -1007,8 +927,6 @@ void Game::renderSet()
 			this->stab.play();
 			this->bot_main.deletePoint();
 			this->bot5.setAlpha(255);
-			//this->bot_main.randomGrid();
-			//while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
 			this->bot_main.setGrid(4);
 			this->bot6.setGrid(this->bot_main.getGrid()); //
 			this->bot_main.setLockGridState(this->bot_main.getGrid());
@@ -1026,8 +944,6 @@ void Game::renderSet()
 			this->stab.play();
 			this->bot_main.deletePoint();
 			this->bot6.setAlpha(255);
-			//this->bot_main.randomGrid();
-			//while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
 			this->bot_main.setGrid(6);
 			this->bot7.setGrid(this->bot_main.getGrid()); //
 			this->bot_main.setLockGridState(this->bot_main.getGrid());
@@ -1045,8 +961,6 @@ void Game::renderSet()
 			this->stab.play();
 			this->bot_main.deletePoint();
 			this->bot7.setAlpha(255);
-			//this->bot_main.randomGrid();
-			//while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
 			this->bot_main.setGrid(7);
 			this->bot8.setGrid(this->bot_main.getGrid()); //
 			this->bot_main.setLockGridState(this->bot_main.getGrid());
@@ -1064,8 +978,6 @@ void Game::renderSet()
 			this->stab.play();
 			this->bot_main.deletePoint();
 			this->bot8.setAlpha(255);
-			//this->bot_main.randomGrid();
-			//while (this->bot_main.getLockState(this->bot_main.getGrid()) == true) this->bot_main.randomGrid();
 			this->bot_main.setGrid(1);
 			this->bot9.setGrid(this->bot_main.getGrid()); //
 			this->bot_main.setLockGridState(this->bot_main.getGrid());
@@ -1145,7 +1057,6 @@ void Game::update()
 
 void Game::render()
 {
-	//Render Game Objects
 	this->window->clear();
 	
 	this->renderSet();
@@ -1164,11 +1075,6 @@ void Game::render()
 	if (this->bot9.getGrid() == this->map.getGridNum()) this->bot9.render(this->window);
 	if (this->bot10.getGrid() == this->map.getGridNum()) this->bot10.render(this->window);
 	this->player.render(this->window);
-
-	//Debugs
-	//cout << this->getGameRound();
-	//if (this->player.getcollisionState_D() == true) this->point.~Point();
-	//this->window->draw(this->enemy);
 
 	this->window->display();
 }

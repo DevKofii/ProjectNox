@@ -98,25 +98,13 @@ void Map::initSprite()
 	this->sprite.setTexture(this->grid1);
 }
 
-void Map::initShape()
-{
-	//this->shape.setFillColor(sf::Color::Black);
-	//this->shape.setSize(sf::Vector2f(1280.f, 720.f));
-}
-
 Map::Map()
 {
 	this->shape.setPosition(0.f, 0.f);
 
 	this->initTex();
 	this->initSprite();
-	//this->initShape();
 	gridNum = 1;
-}
-
-Map::~Map()
-{
-	//Window Bounds Collision
 }
 
 bool Map::getMapState() {
@@ -195,26 +183,8 @@ void Map::setGridMap()
 	}
 }
 
-void Map::updateMap(int gridNum)
-{
-	switch (gridNum)
-	{
-	case 1:
-		//this->shape.setFillColor(sf::Color::Black);
-		break;
-	case 2:
-		//this->shape.setFillColor(sf::Color::Black);
-		break;
-	case 3:
-		//this->shape.setFillColor(sf::Color::Black);
-		break;
-	}
-}
-
-
 void Map::update(const sf::RenderTarget* target)
 {
-	this->updateMap(this->state);
 	this->setGridMap();
 }
 

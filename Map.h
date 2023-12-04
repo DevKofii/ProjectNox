@@ -25,7 +25,6 @@ private:
 	
 public:
 	Map();
-	virtual ~Map();
 
 	bool getMapState();
 	void setMapState(bool state);
@@ -35,7 +34,6 @@ public:
 
 	void setGridMap();
 
-	void updateMap(int gridNum); //updateMap states
 	void update(const sf::RenderTarget* target);
 	void render(sf::RenderTarget* target);
 };

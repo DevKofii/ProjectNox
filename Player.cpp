@@ -79,16 +79,7 @@ void Player::initVariables()
 
 void Player::initShape()
 {
-	//this->sprite.setColor(sf::Color(255,255,255,255));
 	this->sprite.setScale(sf::Vector2f(0.8f, 0.8f));
-	//this->shape.setFillColor(sf::Color::White);
-	//this->shape.setSize(sf::Vector2f(100.f, 100.f));
-	//this->shape.setScale(sf::Vector2f(0.5f, 0.5f));
-}
-
-void Player::initSFX()
-{
-
 }
 
 Player::Player(float x, float y)
@@ -99,13 +90,6 @@ Player::Player(float x, float y)
 	this->initSprite();
 	this->initVariables();
 	this->initShape();
-	this->initSFX();
-}
-
-Player::~Player()
-{
-	//Window Bounds Collision
-
 }
 
 bool Player::getcollisionState_L()
@@ -291,15 +275,12 @@ void Player::updateInput()
 
 void Player::updateWindowBoundsCollision(const sf::RenderTarget* target)
 {
-	//sf::Vector2f this->shape.getGlobalBounds() = this->shape.getPosition();
 
 	//Left
 	if (this->sprite.getGlobalBounds().left <= 0.f)
 	{
 		this->sprite.setPosition(0.f, this->sprite.getGlobalBounds().top);
-		//printf("Test\n");
 		setcollisionState_L(true);
-		//Call updateMap to switch to different Map
 	}
 
 	//Right
