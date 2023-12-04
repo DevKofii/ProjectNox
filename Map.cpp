@@ -1,5 +1,4 @@
 #include "Map.h"
-#include "Player.h"
 
 void Map::initTex()
 {
